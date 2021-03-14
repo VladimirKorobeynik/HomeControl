@@ -40,6 +40,10 @@
 
         <main>
             <p>Contacts</p>
+            <h1>Location</h1>
+            <div class="map" id="map">
+
+            </div>
         </main>
 
         <footer class="footer">
@@ -55,6 +59,24 @@
                 </div>
             </div>
         </footer>
+        <script>
+            function initMap() {
+  // The location of Uluru
+  const uluru = { lat: 51.6159853, lng: 4.7538639 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 18,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+}
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAMQ9lQs2wpePuFyCso5eT4SCJiveur0I&callback=initMap&libraries=&v=weekly">
+        </script>  
     </body>
     <script src="loader.js"></script>
 </html>
