@@ -44,7 +44,7 @@ html::-webkit-scrollbar {
     position: absolute;
     top: 90px;
     left: 90px;
-    animation: 1s spin infinite linear;
+    animation: 1s spinBack infinite linear;
 }
 
 .loader .bigGear {
@@ -67,6 +67,15 @@ html::-webkit-scrollbar {
     }
     to {
         transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes spinBack {
+    from {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 }
 

@@ -37,6 +37,14 @@ window.onscroll = function () {
   }
 }
 
+//Button up
+upButton.onclick = function () {
+  document.getElementById("header").scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  })
+}
+
 //Test update stat
 function upStat(stat) {
   let timerId = setInterval(function() {
@@ -52,14 +60,5 @@ function upStat(stat) {
     }
     stat++;
   }, 35);
-}
-
-
-//Button up
-upButton.onclick = function () {
-  document.getElementById("header").scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  })
 }
 
