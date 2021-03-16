@@ -65,7 +65,11 @@ function upStat(stat) {
 let stageWorkArr = document.getElementsByClassName("stage");
 for (let i = 0; i < stageWorkArr.length; i++) {
     stageWorkArr[i].addEventListener("click", function() {
-        alert("asd");
-        stageWorkArr[i].childNodes[0].childNodes[1];
+        let stage = stageWorkArr[i].childNodes[1].childNodes[3];
+        if (stage.classList.contains("more_display")) {
+            stage.classList.remove("more_display");
+        } else {
+            stage.classList.add("more_display");
+        }
     });
 }

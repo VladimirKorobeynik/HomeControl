@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="contacts.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Login.css">
+    <link rel="stylesheet" href="fontawesome.css">
     <link rel="shortcut icon" href="photo/MainLogo.png" type="image/x-icon">
     <title>Home Control</title>
 </head>
@@ -34,37 +36,31 @@
                 <a class="nav_link" href="index.html#us">About Us</a>
                 <a class="nav_link" href="Contacts.html">Contacts</a>
                 <a class="nav_link" href="#">Marketplace</a>
-                <a class="nav_link" href="Login.html">Login</a>
+                <a class="nav_link" href="#">Login</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <div class="container">
-            <h1>Our contacts</h1>
-
-            <div class="contacts_block">
-                <div class="info_block">
-                    <div class="numbers">
-                        <p class="number_title">Numbers:</p>
-                        <div class="num">
-                            <p>+380964442312</p>
-                            <p>+380955443423</p>
-                        </div>
-                    </div>
-                    <div class="address_block">
-                        <span>Address:</span>
-                        <p class="address">Kharkiv, prospect 228, 7/9</p>
-                    </div>
-                    <a href="#" class="email">homecontrol2020@gmail.com</a>
+        <div class="Form">
+            <p>Login</p>
+            <form id="forma">
+                <div class="f-group">
+                    <input id="login" type="text" placeholder="Логин" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                    <label for="login">Логин</label>
+                    <img class="success" id="first" alt="">
                 </div>
-                <div class="map_block">
-                    <div class="map" id="map">
 
-                    </div>
+                <div class="f-group">
+                    <input id="password" type="text" placeholder="Пароль" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                    <label for="password">Пароль</label>
                 </div>
-            </div>
+
+                <p><button class="button" type="button" name="" value="Submit">Submit</button></p>
+                <p><button class="button" type="button" name="" value="Submit">Submit</button></p>
+            </form>
         </div>
+
     </main>
 
     <footer class="footer">
@@ -80,28 +76,8 @@
             </div>
         </div>
     </footer>
-    <script>
-        function initMap() {
-            // The location of Uluru
-            const uluru = {
-                lat: 51.6159853,
-                lng: 4.7538639
-            };
-            // The map, centered at Uluru
-            const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 18,
-                center: uluru,
-            });
-            // The marker, positioned at Uluru
-            const marker = new google.maps.Marker({
-                position: uluru,
-                map: map,
-            });
-        }
-    </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAMQ9lQs2wpePuFyCso5eT4SCJiveur0I&callback=initMap&libraries=&v=weekly">
-    </script>
 </body>
 <script src="loader.js"></script>
+<script src="https://kit.fontawesome.com/e3dce40605.js" crossorigin="anonymous"></script>
 
 </html>

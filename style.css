@@ -604,6 +604,13 @@ html::-webkit-scrollbar {
 }
 
 
+/* Work with opening more text */
+
+.more_display {
+    display: block;
+}
+
+
 /* ==================== Footer =================== */
 
 .footer {
