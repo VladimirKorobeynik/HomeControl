@@ -5,7 +5,12 @@ body {
     position: relative;
 }
 
-p, h1, h2, h3, h4, h5 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
     margin: 0;
 }
 
@@ -21,8 +26,8 @@ html::-webkit-scrollbar {
     position: fixed;
     z-index: 999;
     transition: 1s all;
-	opacity: 1;
-	visibility: visible;
+    opacity: 1;
+    visibility: visible;
 }
 
 .loader {
@@ -57,8 +62,8 @@ html::-webkit-scrollbar {
 }
 
 .pageLoad {
-	opacity: 0;
-	visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
 }
 
 @keyframes spin {
@@ -106,7 +111,9 @@ html::-webkit-scrollbar {
     transform: translate(-50%, -50%);
 }
 
+
 /* ==================== Header =================== */
+
 .header {
     background-color: #009688;
     max-width: 100%;
@@ -132,14 +139,14 @@ html::-webkit-scrollbar {
     line-height: 50px;
 }
 
+
 /* Navigation */
 
 .logo_link {
     font-size: 50px;
     font-weight: 700;
-    color:#fff;
+    color: #fff;
     text-decoration: none;
-    
 }
 
 .nav {
@@ -156,12 +163,16 @@ html::-webkit-scrollbar {
     position: relative;
     transition: color .2s linear;
 }
+
 .nav img {
     width: 50px;
     height: 45px;
     border-radius: 50%;
 }
+
+
 /* Подчеркивание при наведении */
+
 .nav_link::after {
     content: "";
     display: block;
@@ -169,17 +180,15 @@ html::-webkit-scrollbar {
     height: 3px;
     background-color: #FFB274;
     opacity: 0;
-
     position: absolute;
     top: 100%;
     left: 0;
     z-index: 1;
-
     transition: opacity .2s linear;
 }
 
 .nav_link:hover {
-    color:#FFB274;
+    color: #FFB274;
 }
 
 .nav_link:hover::after {
@@ -197,6 +206,7 @@ html::-webkit-scrollbar {
     max-height: 100%;
 }
 
+
 /* ==================== Main =================== */
 
 .container {
@@ -205,16 +215,15 @@ html::-webkit-scrollbar {
     margin: 0 auto;
 }
 
+
 /* Section Welcome */
 
 .section-welcome {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     width: 100%;
     height: 100vh;
-    
     background-image: url("photo/bgWelcomSection.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -227,7 +236,7 @@ html::-webkit-scrollbar {
     display: block;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     z-index: 2;
     backdrop-filter: blur(3px);
@@ -262,7 +271,8 @@ html::-webkit-scrollbar {
     position: relative;
 }
 
-.welcome_text::before, .welcome_text::after {
+.welcome_text::before,
+.welcome_text::after {
     content: '';
     display: block;
     width: 100px;
@@ -285,7 +295,6 @@ html::-webkit-scrollbar {
     display: inline-block;
     vertical-align: top;
     padding: 10px 30px;
-
     border: 3px solid #fff;
     color: #fff;
     font-family: cursive;
@@ -295,7 +304,9 @@ html::-webkit-scrollbar {
     border-radius: 50px;
 }
 
+
 /* Learn more Подчеркивание */
+
 .btn:hover {
     background-color: #F0A77B;
     transition: background-color .2s linear
@@ -303,6 +314,7 @@ html::-webkit-scrollbar {
 
 
 /* Section */
+
 .section {
     padding: 40px 0;
     border-bottom: 6px solid #009688;
@@ -312,25 +324,27 @@ html::-webkit-scrollbar {
     width: 100%;
     max-width: 950px;
     margin: 0 auto 40px;
-
     text-align: center;
 }
 
 .section_title {
     font-size: 30px;
     font-weight: bold;
-    color:black;
+    color: black;
     margin-bottom: 5px;
 }
+
 .selection_subtitle {
     font-size: 24px;
     color: black;
     margin-bottom: 10px;
 }
+
 .section_text {
     color: #333;
     font-size: 15px;
 }
+
 
 /* Section About Us */
 
@@ -381,27 +395,35 @@ html::-webkit-scrollbar {
     background-color: #95e1d3;
     position: relative;
 }
+
 .item img {
     width: 380px;
     height: 250px;
 }
+
 .item:hover .about_img {
     transform: translate3d(-10px, -10px, 0);
 }
+
 .item:hover .about_img img {
     opacity: .1;
     cursor: pointer;
 }
+
 .about_img {
     border-radius: 10px;
-    background: linear-gradient(to bottom, #f38181 , #fce38a);
+    background: linear-gradient(to bottom, #f38181, #fce38a);
     height: 250px;
     transition: transform .2s linear;
 }
+
 .about_img img {
     transition: opacity .1s linear;
 }
+
+
 /* Team */
+
 .team {
     width: 100%;
     font-size: 18px;
@@ -410,7 +432,6 @@ html::-webkit-scrollbar {
     font-weight: bold;
     text-align: center;
     opacity: 0;
-
     position: absolute;
     top: 50%;
     left: 0;
@@ -418,10 +439,14 @@ html::-webkit-scrollbar {
     transform: translate3d(0, -50%, 0);
     transition: opacity .2s linear;
 }
+
 .item:hover .team {
     opacity: 1;
 }
+
+
 /* Tech */
+
 .tech {
     width: 100%;
     font-size: 18px;
@@ -430,7 +455,6 @@ html::-webkit-scrollbar {
     font-weight: bold;
     text-align: center;
     opacity: 0;
-
     position: absolute;
     top: 50%;
     left: 0;
@@ -438,10 +462,14 @@ html::-webkit-scrollbar {
     transform: translate3d(0, -50%, 0);
     transition: opacity .2s linear;
 }
+
 .item:hover .tech {
     opacity: 1;
 }
+
+
 /* Friends */
+
 .Friends {
     width: 100%;
     font-size: 18px;
@@ -450,7 +478,6 @@ html::-webkit-scrollbar {
     font-weight: bold;
     text-align: center;
     opacity: 0;
-
     position: absolute;
     top: 50%;
     left: 0;
@@ -458,9 +485,12 @@ html::-webkit-scrollbar {
     transform: translate3d(0, -50%, 0);
     transition: opacity .2s linear;
 }
+
 .item:hover .Friends {
     opacity: 1;
 }
+
+
 /* Section Statistics */
 
 .section_statistics {
@@ -478,7 +508,7 @@ html::-webkit-scrollbar {
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     position: absolute;
     z-index: 2;
 }
@@ -498,9 +528,11 @@ html::-webkit-scrollbar {
     padding: 70px 20px;
     text-align: center;
 }
+
 .stat_item:last-child {
     border-right: 1px solid #fff;
 }
+
 .stat_count {
     font-size: 72px;
     font-weight: bold;
@@ -508,12 +540,14 @@ html::-webkit-scrollbar {
     margin-bottom: 10px;
     color: #fff;
 }
+
 .stat_text {
     font-size: 14px;
     text-transform: uppercase;
     color: #fff;
     font-weight: bold;
 }
+
 
 /* Section Services*/
 
@@ -541,31 +575,34 @@ html::-webkit-scrollbar {
     border-radius: 50%;
     background-color: #009688;
 }
-/* .stat_item {
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    position: relative;
-    border: 2px solid black;
+
+
+/* Section Work */
+
+.list_stage_work {
+    padding: 20px 0;
 }
-.stat_item::after{
-    content:"";
-    display: block;
-    width: 2px;
-    height: 120px;
-    position: absolute;
-    right: -88px;
-    background-color: #fff;
-    top: -10px;
+
+.list_stage_work .divider {
+    width: 20px;
+    height: 20px;
+    background-color: #F0A77B;
+    border-radius: 50%;
 }
-.stat_item:last-child::after{
+
+.stage {
+    border: 1px solid #333;
+    border-radius: 5px;
+    padding: 20px 10px;
+    -webkit-box-shadow: 0px 0px 17px 7px rgba(34, 60, 80, 0.27);
+    -moz-box-shadow: 0px 0px 17px 7px rgba(34, 60, 80, 0.27);
+    box-shadow: 0px 0px 17px 7px rgba(34, 60, 80, 0.27);
+}
+
+.more_stage {
     display: none;
 }
-.statistics .container {
-    display: flex;
-    justify-content: space-between;
-    padding: 100px 0;
-} */
+
 
 /* ==================== Footer =================== */
 

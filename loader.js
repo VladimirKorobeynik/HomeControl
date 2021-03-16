@@ -1,9 +1,9 @@
 //Прелоадер
-window.onload = function () {
+window.onload = function() {
     const preloader = document.getElementById('preloader');
-    setTimeout(function () {
-      if (!preloader.classList.contains('pageLoad')) {
-        preloader.classList.add('pageLoad');
-      }
+    setTimeout(function() {
+        if (!preloader.classList.contains('pageLoad')) {
+            preloader.classList.add('pageLoad');
+        }
     }, 500);
 }
