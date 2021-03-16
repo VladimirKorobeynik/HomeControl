@@ -42,23 +42,102 @@
     </header>
 
     <main>
-        <div class="Form">
-            <p>Login</p>
-            <form id="forma">
-                <div class="f-group">
-                    <input id="login" type="text" placeholder="Логин" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
-                    <label for="login">Логин</label>
-                    <img class="success" id="first" alt="">
+        <div class="form form_login" id="loginForm">
+            <div class="form_head">
+                <div class="wrapper_image">
+                    <div class="form_block_image">
+                        <img src="photo/UserAvatar.png" alt="">
+                    </div>
                 </div>
+                <p>Authorization</p>
+            </div>
+            <div class="form_content">
+                <form id="forma">
+                    <div class="input_block">
+                        <div class="f-group">
+                            <input id="login" type="text" placeholder="Login" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                            <label for="login">Login</label>
+                        </div>
 
-                <div class="f-group">
-                    <input id="password" type="text" placeholder="Пароль" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
-                    <label for="password">Пароль</label>
+                        <div class="f-group">
+                            <input id="password" type="password" placeholder="Password" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                            <label for="password">Password</label>
+                            <i class="fa fa-eye-slash hide_pass" id="hidePass"></i>
+                        </div>
+                    </div>
+                    <div class="button_block">
+                        <button class="button" type="button" name="" value="Submit">Login</button>
+                        <button class="button" id="loginRegisterBtn" type="button" name="" value="Submit">Registration</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="form form_registration" id="registerForm">
+            <div class="form_head">
+                <i class="fa fa-arrow-left backToLogin" id="backToLoginForm"></i>
+                <div class="wrapper_image">
+                    <div class="form_block_image">
+                        <img src="photo/UserAvatar.png" alt="">
+                    </div>
                 </div>
+                <p>Registration</p>
+            </div>
+            <div class="form_content">
+                <form id="forma">
+                    <div class="input_block input_block_register">
+                        <div class="left_block">
+                            <div class="f-group">
+                                <input id="name" type="text" placeholder="Name" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="name">Name</label>
+                            </div>
+                            <div class="f-group">
+                                <input id="fullname" type="text" placeholder="Fullname" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="fullname">Fullname</label>
+                            </div>
+                            <div class="f-group">
+                                <input id="patronymic" type="text" placeholder="Patronymic" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="patronymic">Patronymic</label>
+                            </div>
+                            <div class="f-group">
+                                <input id="number" type="text" placeholder="Number" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="number">Number</label>
+                            </div>
+                            <div class="f-group">
+                                <input id="address" type="text" placeholder="Address" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="address">Address</label>
+                            </div>
+                        </div>
+                        <div class="right_block">
+                            <div class="f-group">
+                                <input id="email" type="email" placeholder="Email" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="f-group">
+                                <input id="birthday" type="date" placeholder="Date of birth" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="birthday">Date of birth</label>
+                            </div>
+                            <div class="f-group">
+                                <input id="login" type="text" placeholder="Login" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="login">Login</label>
+                            </div>
 
-                <p><button class="button" type="button" name="" value="Submit">Submit</button></p>
-                <p><button class="button" type="button" name="" value="Submit">Submit</button></p>
-            </form>
+                            <div class="f-group">
+                                <input id="regPassword" type="password" placeholder="Password" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="regPassword">Password</label>
+                                <i class="fa fa-eye-slash hide_pass" id="hidePassReg"></i>
+                            </div>
+                            <div class="f-group">
+                                <input id="repeatPassword" type="password" placeholder="Repeat password" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                                <label for="repeatPassword">Repeat password</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button_block">
+                        <button class="button register_btn" type="button" name="" value="Submit">Register</button>
+                    </div>
+                </form>
+            </div>
         </div>
 
     </main>
@@ -77,6 +156,7 @@
         </div>
     </footer>
 </body>
+<script src="authorization.js"></script>
 <script src="loader.js"></script>
 <script src="https://kit.fontawesome.com/e3dce40605.js" crossorigin="anonymous"></script>
 

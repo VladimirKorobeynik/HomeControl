@@ -62,14 +62,15 @@ function upStat(stat) {
     }, 35);
 }
 
+//More stage
 let stageWorkArr = document.getElementsByClassName("stage");
 for (let i = 0; i < stageWorkArr.length; i++) {
     stageWorkArr[i].addEventListener("click", function() {
         let stage = stageWorkArr[i].childNodes[1].childNodes[3];
-        if (stage.classList.contains("more_display")) {
-            stage.classList.remove("more_display");
+        if (stage.style.maxHeight) {
+            stage.style.maxHeight = null;
         } else {
-            stage.classList.add("more_display");
+            stage.style.maxHeight = stage.scrollHeight + "px";
         }
     });
 }

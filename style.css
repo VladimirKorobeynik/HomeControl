@@ -583,32 +583,77 @@ html::-webkit-scrollbar {
     padding: 20px 0;
 }
 
-.list_stage_work .divider {
-    width: 20px;
-    height: 20px;
+.divider {
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
     background-color: #F0A77B;
     border-radius: 50%;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    width: 2px;
+    height: 6px;
+    background-color: #B6B6B6;
+    position: absolute;
+}
+
+.divider::before {
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.divider::after {
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .stage {
-    border: 1px solid #333;
+    border: 1px solid #B6B6B6;
     border-radius: 5px;
     padding: 20px 10px;
-    -webkit-box-shadow: 0px 0px 17px 7px rgba(34, 60, 80, 0.27);
-    -moz-box-shadow: 0px 0px 17px 7px rgba(34, 60, 80, 0.27);
-    box-shadow: 0px 0px 17px 7px rgba(34, 60, 80, 0.27);
+    margin: 15px 0;
+    cursor: pointer;
+    transition: all 0.5s ease;
 }
 
 .more_stage {
-    display: none;
+    /* display: none; */
+    margin-top: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.more_stage h4 {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.more_stage h4::after {
+    content: '';
+    display: block;
+    width: 100px;
+    position: absolute;
+    height: 4px;
+    background-color: #FFB274;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
 /* Work with opening more text */
 
-.more_display {
+
+/* .more_display {
     display: block;
-}
+} */
 
 
 /* ==================== Footer =================== */
