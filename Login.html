@@ -52,21 +52,21 @@
                 <p>Authorization</p>
             </div>
             <div class="form_content">
-                <form id="forma">
+                <form id="forma" action="authorization.php" method="POST">
                     <div class="input_block">
                         <div class="f-group">
-                            <input id="login" type="text" placeholder="Login" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                            <input id="login" type="text" placeholder="Login" name="login" />
                             <label for="login">Login</label>
                         </div>
 
                         <div class="f-group">
-                            <input id="password" type="password" placeholder="Password" onKeyUp="if(/[^a-zA-Zа .]/i.test(this.value)){this.value='';}" />
+                            <input id="password" type="password" placeholder="Password" name="password" />
                             <label for="password">Password</label>
                             <i class="fa fa-eye-slash hide_pass" id="hidePass"></i>
                         </div>
                     </div>
                     <div class="button_block">
-                        <button class="button" type="button" name="" value="Submit">Login</button>
+                        <button class="button" type="submit" name="" value="Submit">Login</button>
                         <button class="button" id="loginRegisterBtn" type="button" name="" value="Submit">Registration</button>
                     </div>
                 </form>
