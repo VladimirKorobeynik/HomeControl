@@ -99,7 +99,9 @@
 
             $mysql = new mysqli('localhost', 'root', 'root', 'homecontrol');
             $email = $userInfo['email'];
-            if (!(count($mysql->query("SELECT `user_id` FROM `users` WHERE `email` = '$email'")) > 0)) {
+            $result_user = $mysql->query("SELECT `user_id` FROM `users` WHERE `email` = '$email'");
+            $user_arr_data = $result_user->fetch_assoc();
+            if (!(count($user_arr_data) > 0)) {
 
                 $chars = "qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP";
 
@@ -130,8 +132,14 @@
 
                 $mysql->query("INSERT INTO `users` (`role_id`,`fullname`,`name`,`email`, `login`, `password`, `registration_date`, `is_active`)
             VALUES ('$role', '$fullname', '$name', '$email', '$login', '$password', '$register_date', '$status')");
+                $mysql->close();
+
+                setcookie('user', $userInfo['given_name'], time() + 3600, "/");
+
+                header('Location: /Login.php');
             } else {
                 setcookie('user', $userInfo['given_name'], time() + 3600, "/");
+                
                 header('Location: /Login.php');
             }
             if (isset($userInfo['id'])) {
@@ -157,7 +165,7 @@
     <header class="header">
         <div class="header_inner">
             <div class="header_logo">
-                <a class="logo_link" href="index.html">
+                <a class="logo_link" href="index.php">
                     <div class="logo-block">
                         <img src="photo/MainLogo.png" alt="">
                     </div>
@@ -165,10 +173,10 @@
                 </a>
             </div>
             <nav class="nav">
-                <a class="nav_link" href="index.html">Home</a>
-                <a class="nav_link" href="index.html#services">Services</a>
-                <a class="nav_link" href="index.html#us">About Us</a>
-                <a class="nav_link" href="Contacts.html">Contacts</a>
+                <a class="nav_link" href="index.php">Home</a>
+                <a class="nav_link" href="index.php#services">Services</a>
+                <a class="nav_link" href="index.php#us">About Us</a>
+                <a class="nav_link" href="Contacts.php">Contacts</a>
                 <a class="nav_link" href="#">Marketplace</a>
                 <?php
                 if ($_COOKIE['user'] == '') :
@@ -212,7 +220,7 @@
                         <div class="button_block">
                             <button class="button" type="submit" name="" value="Submit">Login</button>
                             <button class="button" id="loginRegisterBtn" type="button" name="" value="Submit">Registration</button>
-                            <?php echo $link = '<a class="button" style="display:block;" href="' . $url . '?' . urldecode(http_build_query($params)) . '">Аутентификация через Google</a>'; ?>
+                            <?php echo $link = '<a class="button" style="background-color:white;border:1px solid black; text-decoration:none; color:black; font-weight:300;display:flex;padding:15px 35px;" href="' . $url . '?' . urldecode(http_build_query($params)) . '"><img src="photo/google_icon.png" style="max-width:30px;max-height:auto;margin-right:10px;"/><p style="line-height:30px; font-size:14px">Аутентификация через Google</p></a>'; ?>
                         </div>
                     </form>
                 </div>
