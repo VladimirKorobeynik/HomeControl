@@ -36,7 +36,13 @@
                 <a class="nav_link" href="index.html#us">About Us</a>
                 <a class="nav_link" href="Contacts.html">Contacts</a>
                 <a class="nav_link" href="#">Marketplace</a>
+                <?php
+                    if($_COOKIE['user'] == ''):
+                ?>
                 <a class="nav_link" href="Login.php">Login</a>
+                <?php else:?>
+                <?=$_COOKIE['']?><a href="/exit.php" class="exit_link">Log out</a>
+                <?php endif;?>
             </nav>
         </div>
     </header>
@@ -75,8 +81,6 @@
                     </div>
                 </form>
             </div>
-            <?php else:?>
-            <p>Привет <?=$_COOKIE['']?>. Чтобы выйти нажмите<a href="/exit.php">здесь</a></p>
             <?php endif;?>
         </div>
 

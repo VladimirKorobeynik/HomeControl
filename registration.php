@@ -12,7 +12,7 @@
 
     $status = true;
     $role = 2;
-    $password = md5($password."ghjfdkhgj453534");
+    $password = md5($password."ghjfdkhgj453534$#@#");
 
     $mysql = new mysqli('localhost', 'root', 'root', 'homecontrol');
 

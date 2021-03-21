@@ -177,3 +177,12 @@ input:valid {
     font-size: 20px;
     cursor: pointer;
 }
+
+.exit_link {
+    color: rgb(224, 69, 69);
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 10px;
+    position: relative;
+}
