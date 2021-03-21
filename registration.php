@@ -16,7 +16,7 @@
 
     $mysql = new mysqli('localhost', 'root', 'root', 'homecontrol');
 
-    $mysql->query("INSERT INTO `users` (`role_id`,`fullname`,`name`,`patronymic`,`number`,`address`,`email`,`birthday`, `login`, `password`, `registration_date`, `status`)
+    $mysql->query("INSERT INTO `users` (`role_id`,`fullname`,`name`,`patronymic`,`number`,`address`,`email`,`birthday`, `login`, `password`, `registration_date`, `is_active`)
     VALUES ('$role', '$fullname', '$name', '$patronymic', '$number', '$address', '$email', '$birth', '$login', '$password', '$register_date', '$status')");
 
 ?>
