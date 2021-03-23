@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="shortcut icon" href="photo/MainLogo.png" type="image/x-icon">
     <title>Home Control</title>
 </head>
@@ -18,35 +18,11 @@
         </div>
     </div>
 
-    <a href="#" class="buuton_up" id="upBtn">
+    <a href="#header" class="buuton_up" id="upBtn">
         <img src="photo/upButtonArrow.png" alt="up">
     </a>
-    <header class="header" id="header">
-        <div class="header_inner">
-            <div class="header_logo">
-                <a class="logo_link" href="index.php">
-                    <div class="logo-block">
-                        <img src="photo/MainLogo.png" alt="">
-                    </div>
-                    <h5>Home Control</h5>
-                </a>
-            </div>
-            <nav class="nav">
-                <a class="nav_link" href="index.php">Home</a>
-                <a class="nav_link" href="#services">Services</a>
-                <a class="nav_link" href="#us">About Us</a>
-                <a class="nav_link" href="Contacts.php">Contacts</a>
-                <a class="nav_link" href="#">Marketplace</a>
-                <?php
-                if ($_COOKIE['user'] == '') :
-                ?>
-                    <a class="nav_link" href="Login.php">Login</a>
-                <?php else : ?>
-                    <?= $_COOKIE[''] ?><a href="/exit.php" class="exit_link">Log out</a>
-                <?php endif; ?>
-            </nav>
-        </div>
-    </header>
+
+    <?php include 'parts/header.php' ?>
 
     <main>
         <section class="section section-welcome" id="welcome">
@@ -54,7 +30,7 @@
                 <div class="welcome_inner">
                     <h1 class="welcome_title">Welcome To <br>Home Control</h1>
                     <p class="welcome_text">We will help you become freer and more productive</p>
-                    <a class="btn" href="#work">Learn More</a>
+                    <a class="btn" id="moreWork" href="#work">Learn More</a>
                 </div>
             </div>
         </section>
@@ -251,21 +227,9 @@
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="information-block">
-                <div class="social">
-                    <a href="#" class="soc">Instagram</a>
-                    <a href="#" class="soc">Telegram</a>
-                    <a href="#" class="soc">Youtube</a>
-                    <a href="#" class="soc">VK</a>
-                </div>
-                <p>2021 &copy; Home Control</p>
-            </div>
-        </div>
-    </footer>
+    <?php include 'parts/footer.php' ?>
 </body>
-<script src="code.js"></script>
-<script src="loader.js"></script>
+<script src="js/code.js"></script>
+<script src="js/loader.js"></script>
 
 </html>
