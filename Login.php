@@ -13,8 +13,6 @@
 
 <body>
     <?php
-
-
     //Заполенные данные с google'a
     $client_id = '123373435506-4a1sroj5ldous58al35rtieutpv56p1h.apps.googleusercontent.com'; // Client ID
 
@@ -101,6 +99,7 @@
             $email = $userInfo['email'];
             $result_user = $mysql->query("SELECT `user_id` FROM `users` WHERE `email` = '$email'");
             $user_arr_data = $result_user->fetch_assoc();
+            $secret_name = md5($userInfo['given_name'] . "ghjfdkhgj453534$#@#");
             if (!(count($user_arr_data) > 0)) {
 
                 $chars = "qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP";
@@ -134,13 +133,12 @@
             VALUES ('$role', '$fullname', '$name', '$email', '$login', '$password', '$register_date', '$status')");
                 $mysql->close();
 
-                setcookie('user', $userInfo['given_name'], time() + 3600, "/");
+                setcookie('user', $secret_name, time() + 3600, "/");
 
-                header('Location: /Login.php');
+                header('Location: /profile.php');
             } else {
-                setcookie('user', $userInfo['given_name'], time() + 3600, "/");
-                
-                header('Location: /Login.php');
+                setcookie('user', $secret_name, time() + 3600, "/");
+                header('Location: /profile.php');
             }
             if (isset($userInfo['id'])) {
 
@@ -190,10 +188,10 @@
     </header>
 
     <main>
-        <div class="form form_login" id="loginForm">
-            <?php
-            if ($_COOKIE['user'] == '') :
-            ?>
+        <?php
+        if ($_COOKIE['user'] == '') :
+        ?>
+            <div class="form form_login" id="loginForm">
                 <div class="form_head">
                     <div class="wrapper_image">
                         <div class="form_block_image">
@@ -224,75 +222,76 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <?php else : ?>
+                    <h1>darova</h1>
             <?php endif; ?>
-        </div>
-
-        <div class="form form_registration" id="registerForm">
-            <div class="form_head">
-                <i class="fa fa-arrow-left backToLogin" id="backToLoginForm"></i>
-                <div class="wrapper_image">
-                    <div class="form_block_image">
-                        <img src="photo/UserAvatar.png" alt="">
+            <div class="form form_registration" id="registerForm">
+                <div class="form_head">
+                    <i class="fa fa-arrow-left backToLogin" id="backToLoginForm"></i>
+                    <div class="wrapper_image">
+                        <div class="form_block_image">
+                            <img src="photo/UserAvatar.png" alt="">
+                        </div>
                     </div>
+                    <p>Registration</p>
                 </div>
-                <p>Registration</p>
-            </div>
-            <div class="form_content">
-                <form id="forma" action="registration.php" method="POST">
-                    <div class="input_block input_block_register">
-                        <div class="left_block">
-                            <div class="f-group">
-                                <input id="name" type="text" placeholder="Name" name="name" />
-                                <label for="name">Name</label>
+                <div class="form_content">
+                    <form id="forma" action="registration.php" method="POST">
+                        <div class="input_block input_block_register">
+                            <div class="left_block">
+                                <div class="f-group">
+                                    <input id="name" type="text" placeholder="Name" name="name" />
+                                    <label for="name">Name</label>
+                                </div>
+                                <div class="f-group">
+                                    <input id="fullname" type="text" placeholder="Fullname" name="fullname" />
+                                    <label for="fullname">Fullname</label>
+                                </div>
+                                <div class="f-group">
+                                    <input id="patronymic" type="text" placeholder="Patronymic" name="patronymic" />
+                                    <label for="patronymic">Patronymic</label>
+                                </div>
+                                <div class="f-group">
+                                    <input id="number" type="text" placeholder="Number" name="number" />
+                                    <label for="number">Number</label>
+                                </div>
+                                <div class="f-group">
+                                    <input id="address" type="text" placeholder="Address" name="address" />
+                                    <label for="address">Address</label>
+                                </div>
                             </div>
-                            <div class="f-group">
-                                <input id="fullname" type="text" placeholder="Fullname" name="fullname" />
-                                <label for="fullname">Fullname</label>
-                            </div>
-                            <div class="f-group">
-                                <input id="patronymic" type="text" placeholder="Patronymic" name="patronymic" />
-                                <label for="patronymic">Patronymic</label>
-                            </div>
-                            <div class="f-group">
-                                <input id="number" type="text" placeholder="Number" name="number" />
-                                <label for="number">Number</label>
-                            </div>
-                            <div class="f-group">
-                                <input id="address" type="text" placeholder="Address" name="address" />
-                                <label for="address">Address</label>
-                            </div>
-                        </div>
-                        <div class="right_block">
-                            <div class="f-group">
-                                <input id="email" type="email" placeholder="Email" name="email" />
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="f-group">
-                                <input id="birthday" type="date" placeholder="Date of birth" name="birth" />
-                                <label for="birthday">Date of birth</label>
-                            </div>
-                            <div class="f-group">
-                                <input id="login" type="text" placeholder="Login" name="login" />
-                                <label for="login">Login</label>
-                            </div>
+                            <div class="right_block">
+                                <div class="f-group">
+                                    <input id="email" type="email" placeholder="Email" name="email" />
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="f-group">
+                                    <input id="birthday" type="date" placeholder="Date of birth" name="birth" />
+                                    <label for="birthday">Date of birth</label>
+                                </div>
+                                <div class="f-group">
+                                    <input id="login" type="text" placeholder="Login" name="login" />
+                                    <label for="login">Login</label>
+                                </div>
 
-                            <div class="f-group">
-                                <input id="regPassword" type="password" placeholder="Password" name="password" />
-                                <label for="regPassword">Password</label>
-                                <i class="fa fa-eye-slash hide_pass" id="hidePassReg"></i>
-                            </div>
-                            <div class="f-group">
-                                <input id="repeatPassword" type="password" placeholder="Repeat password" />
-                                <label for="repeatPassword">Repeat password</label>
+                                <div class="f-group">
+                                    <input id="regPassword" type="password" placeholder="Password" name="password" />
+                                    <label for="regPassword">Password</label>
+                                    <i class="fa fa-eye-slash hide_pass" id="hidePassReg"></i>
+                                </div>
+                                <div class="f-group">
+                                    <input id="repeatPassword" type="password" placeholder="Repeat password" />
+                                    <label for="repeatPassword">Repeat password</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="button_block">
-                        <button class="button register_btn" type="submit" name="" value="Submit">Register</button>
-                    </div>
-                </form>
+                        <div class="button_block">
+                            <button class="button register_btn" type="submit" name="" value="Submit">Register</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
     </main>
 
     <footer class="footer">

@@ -13,12 +13,14 @@
     $status = true;
     $role = 2;
     $password = md5($password."ghjfdkhgj453534$#@#");
+    
+    $secret_name = md5($name."ghjfdkhgj453534$#@#");
 
     $mysql = new mysqli('localhost', 'root', 'root', 'homecontrol');
 
     $mysql->query("INSERT INTO `users` (`role_id`,`fullname`,`name`,`patronymic`,`number`,`address`,`email`,`birthday`, `login`, `password`, `registration_date`, `is_active`)
     VALUES ('$role', '$fullname', '$name', '$patronymic', '$number', '$address', '$email', '$birth', '$login', '$password', '$register_date', '$status')"); 
 
-    setcookie('user', $name, time() + 3600, "/");
-    header('Location: /Login.php');
+    setcookie('user', $secret_name, time() + 3600, "/");
+    header('Location: /profile.php');
 ?>
