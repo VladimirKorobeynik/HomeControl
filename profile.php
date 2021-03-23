@@ -41,7 +41,7 @@
                 ?>
                     <a class="nav_link" href="Login.php">Login</a>
                 <?php else : ?>
-                    <?= $_COOKIE[''] ?><a href="/exit.php" class="exit_link"></a>
+                    <?= $_COOKIE[''] ?><a href="/exit.php" class="exit_link">Log out</a>
                 <?php endif; ?>
             </nav>
         </div>
