@@ -8,12 +8,21 @@
                 <h5>Home Control</h5>
             </a>
         </div>
+        <div class="burger_menu">
+            <input type="checkbox" id="burgerMenu">
+            <label for="burgerMenu">
+                <div class="burger_line first_line"></div>
+                <div class="burger_line second_line"></div>
+                <div class="burger_line third_line"></div>
+                <div class="burger_line fourth_line"></div>
+            </label>
+        </div>
         <nav class="nav">
             <a class="nav_link" href="index.php">Home</a>
             <a class="nav_link" id="serv" href="index.php#services">Services</a>
             <a class="nav_link" id="about" href="index.php#us">About Us</a>
             <a class="nav_link" href="Contacts.php">Contacts</a>
-            <a class="nav_link" href="#">Marketplace</a>
+            <a class="nav_link" href="marketplace.php">Marketplace</a>
             <?php
             if ($_COOKIE['user'] == '') :
             ?>
@@ -22,5 +31,19 @@
                 <?= $_COOKIE[''] ?><a href="../web/exit.php" class="exit_link">Log out</a>
             <?php endif; ?>
         </nav>
+    </div>
+    <div class="mobile_nav" id="mobMenu">
+        <a class="nav_link" href="index.php">Home</a>
+        <a class="nav_link" id="serv" href="index.php#services">Services</a>
+        <a class="nav_link" id="about" href="index.php#us">About Us</a>
+        <a class="nav_link" href="Contacts.php">Contacts</a>
+        <a class="nav_link" href="marketplace.php">Marketplace</a>
+        <?php
+        if ($_COOKIE['user'] == '') :
+        ?>
+            <a class="nav_link" href="../Login.php">Login</a>
+        <?php else : ?>
+            <?= $_COOKIE[''] ?><a href="../web/exit.php" class="exit_link">Log out</a>
+        <?php endif; ?>
     </div>
 </header>

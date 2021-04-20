@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/contacts.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="shortcut icon" href="photo/MainLogo.png" type="image/x-icon">
@@ -52,6 +53,7 @@
 
 </body>
 <script src="js/loader.js"></script>
+<script src="js/header.js"></script>
 <script src="js/google_map.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAMQ9lQs2wpePuFyCso5eT4SCJiveur0I&callback=initMap&libraries=&v=weekly">
 </script>
