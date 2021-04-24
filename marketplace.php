@@ -293,7 +293,11 @@
                                     </div>
                                     <div class="buy_block">
                                         <span class="price">1000grn</span>
+<<<<<<< HEAD
                                         <button class="standart_btn buy_btn" onclick="openModal()">Buy</button>
+=======
+                                        <button class="standart_btn buy_btn">Buy</button>
+>>>>>>> cbd5d4949be3b9b86b5e106ea833ff1bdd7e1e61
                                     </div>
                                 </div>
                             </div>
