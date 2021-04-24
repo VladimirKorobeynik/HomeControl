@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="shortcut icon" href="photo/MainLogo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Control</title>
 </head>
 
@@ -45,7 +46,7 @@
                     <div class="section_text">
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
                             specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                            passages, and more recently with desktop publishing software like Addus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
                 </div>
                 <div class="about">
@@ -160,6 +161,49 @@
                 </div>
         </section>
 
+        <section class="section section_subscription">
+            <div class="container">
+                <div class="section_header">
+                    <h3 class="section_title">Our system</h3>
+                </div>
+                <div class="subscription_content">
+                    <div class="card card_syst">
+                        <div class="card_content">
+                            <h5>Месячная</h5>
+                            <p class="sub_price">1000грн</p>
+                            <p class="sub_desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis officia quisquam,
+                                ducimus consectetur laudantium incidunt sint ut reiciendis saepe blanditiis nesciunt minus,
+                                impedit vel corrupti mollitia asperiores nihil autem! Soluta.
+                            </p>
+                            <a href="#" class="sub_more_btn">More</a>
+                        </div>
+                    </div>
+                    <div class="card card_syst">
+                        <div class="card_content">
+                            <h5>6 месяцев</h5>
+                            <p class="sub_price">2300грн</p>
+                            <p class="sub_desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis officia quisquam,
+                                ducimus consectetur laudantium incidunt sint ut reiciendis saepe blanditiis nesciunt minus,
+                                impedit vel corrupti mollitia asperiores nihil autem! Soluta.
+                            </p>
+                            <a href="#" class="sub_more_btn">More</a>
+                        </div>
+                    </div>
+                    <div class="card card_syst">
+                        <div class="card_content">
+                            <h5>Годовая</h5>
+                            <p class="sub_price">4400грн</p>
+                            <p class="sub_desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis officia quisquam,
+                                ducimus consectetur laudantium incidunt sint ut reiciendis saepe blanditiis nesciunt minus,
+                                impedit vel corrupti mollitia asperiores nihil autem! Soluta.
+                            </p>
+                            <a href="#" class="sub_more_btn">More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="section section_work" id="work">
             <div class="container">
                 <div class="section_header">
@@ -230,6 +274,17 @@
     <?php include 'parts/footer.php' ?>
 </body>
 <script src="js/code.js"></script>
+<script src="js/header.js"></script>
 <script src="js/loader.js"></script>
+<script src="js/vanilla-tilt.js"></script>
+<script>
+    //System cards animation
+    VanillaTilt.init(document.querySelectorAll(".card_syst"), {
+        max: 25,
+        speed: 400,
+        glare: true,
+        'max-glare': 1,
+    });
+</script>
 
 </html>
