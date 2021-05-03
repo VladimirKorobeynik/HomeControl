@@ -18,6 +18,29 @@
             <img src="photo/loaderGear.png" class="smallGear" alt="">
         </div>
     </div>
+    <div class="added_product_messagebox">
+        <span>Товар добавлен в корзину :)</span>
+    </div>
+    <div class="fly_product"></div>
+    <div class="modal_bg"></div>
+    <div class="modal" id="cart">
+        <div class="modal_head">
+            <h2>Ваша Корзина</h2>
+            <span class="close_icon"><img src="photo/closeIconBlack.png" alt="X"></span>
+        </div>
+        <div class="modal_content">
+            <div class="added_product" id="addedCardGrid">
+                <p class="text_empty_cart">Ваша корзина пуста</p>
+            </div>
+            <div class="buy_block_cart">
+                <div class="total_price_block">
+                    <p>Итоговая сумма:</p>
+                    <span class="total_price" id="totalCost">4000грн</span>
+                </div>
+                <button class="create_order_btn standart_btn">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
     <div class="cover_block" id="coverBlock"></div>
     <div class="cover_block" id="coverBlockFilter"></div>
     <div class="filter_block filter_mobile block_theme" id="filterMob">
@@ -114,8 +137,11 @@
                                 <img src="photo/UserAvatar.png" alt="">
                                 <span class="notification"><span>9+</span></span>
                             </div>
-                            <p>user</p>
                         </a>
+                    </div>
+                    <div class="cart_block" id="cartLink">
+                        <img src="photo/shopingCartIcon.png" alt="">
+                        <span class="notification"><span id="cartCounter">0</span></span>
                     </div>
                 </nav>
             </div>
@@ -270,193 +296,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card_grid">
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-<<<<<<< HEAD
-                                        <button class="standart_btn buy_btn" onclick="openModal()">Buy</button>
-=======
-                                        <button class="standart_btn buy_btn">Buy</button>
->>>>>>> cbd5d4949be3b9b86b5e106ea833ff1bdd7e1e61
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-                                        <button class="standart_btn buy_btn">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-                                        <button class="standart_btn buy_btn">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-                                        <button class="standart_btn buy_btn">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-                                        <button class="standart_btn buy_btn">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-                                        <button class="standart_btn buy_btn">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card_wrapper card_mode_tile">
-                                <div class="card">
-                                    <div class="product_image">
-                                        <img src="photo/testProduct.png" alt="">
-                                    </div>
-                                    <div class="min_describe">
-                                        <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                        <div class="in_stock_block">
-                                            <span class="in_stock">
-                                                <img src="photo/checkmark.png" alt="">
-                                            </span>
-                                            <p>in stock</p>
-                                        </div>
-                                    </div>
-                                    <div class="more_describe">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                            quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                            Repellendus officiis quae quisquam blanditiis provident modi,
-                                            itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                    </div>
-                                    <div class="buy_block">
-                                        <span class="price">1000grn</span>
-                                        <button class="standart_btn buy_btn">Buy</button>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="card_grid" id="mainCardGrid">
                         </div>
                         <div class="more_product_block">
                             <button class="standart_btn more_product_btn">More</button>
@@ -613,11 +453,6 @@
                     </div>
                 </div>
             </div>
-        <div class="modal-bg" id="modal">
-            <div class="modal" id="kirich">
-        
-            </div>
-        </div>
         </main>
 
         <?php include 'parts/footer.php' ?>
@@ -625,7 +460,10 @@
     <script src="js/jquery.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/loader.js"></script>
-    <script src="js/marketplace_page.js"></script> 
+    <script src="js/google_pay.js"></script>
+    <script src="js/Products.js"></script>
+    <script src="js/Cart.js"></script>
+    <script src="js/marketplace_page.js"></script>
     <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 
 </body>

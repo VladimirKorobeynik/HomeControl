@@ -125,6 +125,34 @@ html::-webkit-scrollbar {
     opacity: 0;
 }
 
+.added_product_messagebox {
+    width: 350px;
+    height: 100px;
+    padding: 10px;
+    background-color: #bfedff;
+    border: 1px solid #54c8ff;
+    border-radius: 5px;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 12px 12px -9px #333;
+    text-align: center;
+    font-family: sans-serif;
+    opacity: 0;
+    z-index: 200;
+}
+
+.added_product_messagebox span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 15px;
+}
+
 
 /* ==================== Header =================== */
 
@@ -178,7 +206,7 @@ html::-webkit-scrollbar {
     padding: 10px 10px;
     border: 2px solid #D3D3D3;
     border-radius: 20px;
-    outline: none;
+    outline: none !important;
     color: gray;
 }
 
@@ -237,7 +265,8 @@ html::-webkit-scrollbar {
     max-height: 100%;
 }
 
-.user_img .notification {
+.user_img .notification,
+.cart_block .notification {
     position: absolute;
     top: -4px;
     right: -11px;
@@ -252,11 +281,24 @@ html::-webkit-scrollbar {
     border: 1px solid rgb(109, 52, 52);
 }
 
-.user_img .notification span {
+.user_img .notification span,
+.cart_block .notification span {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.cart_block {
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    position: relative;
+}
+
+.cart_block img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .burger_menu {
@@ -1150,8 +1192,8 @@ html::-webkit-scrollbar {
 
 /* Modal window */
 
-.modal-bg {
-    position: fixed;
+.modal_bg {
+    position: absolute;
     width: 100%;
     height: 100vh;
     top: 0;
@@ -1160,25 +1202,211 @@ html::-webkit-scrollbar {
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.modal_bg_active {
+    display: block;
 }
 
 .modal {
+    width: 850px;
+    min-height: 400px;
+    position: absolute;
     background-color: white;
-    width: 50%;
-    height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    border-radius: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 110;
+    padding: 20px;
+    display: none;
 }
 
-.modal .Method-card {
-    padding: 10px 30px;
-    background-color: #2980b9;
-    color: white;
-    border: none;
-    font-family: 'Montserrat', sans-serif;
+.modal .modal_head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.modal .modal_head .close_icon {
+    height: 25px;
     cursor: pointer;
+}
+
+.modal .modal_content {
+    margin-top: 10px;
+}
+
+.modal_content .added_product {
+    height: 340px;
+    position: relative;
+    margin-bottom: 20px;
+    overflow: scroll;
+    padding: 20px;
+}
+
+.modal_content .added_product .text_empty_cart {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: gray;
+    font-size: 25px;
+}
+
+.modal .modal_head img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.modal_content .buy_block_cart {
+    padding: 15px;
+    width: 350px;
+    background-color: #F0FCFF;
+    border: 1px solid #56C7DF;
+    border-radius: 15px;
+    margin-left: 18px;
+}
+
+.modal_content .buy_block_cart .total_price_block {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.modal_content .buy_block_cart .total_price_block .total_price {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.modal_content .buy_block_cart .create_order_btn {
+    border-radius: 6px;
+}
+
+.modal_content .added_product_card {
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 20px rgba(69, 69, 69, 25%);
+}
+
+.modal_content .added_product_card .added_card_head {
+    padding: 15px;
+    width: 100px;
+}
+
+.modal_content .added_card_content {
+    padding: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal_content .added_card_content .in_stock_block {
+    display: flex;
+}
+
+.modal_content .added_card_content .in_stock {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #A5E818;
+    margin-right: 10px;
+    display: block;
+}
+
+.modal_content .added_card_content .name_product,
+.in_stock_block {
+    margin-bottom: 10px;
+}
+
+.modal_content .added_card_content .in_stock img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal_content .added_card_content .in_stock_block {
+    color: #A5E818;
+}
+
+.modal_content .added_card_content .price {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.modal_content .added_card_content .count_product {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.modal_content .added_card_content .count_product .total_cost {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.input_incrementation {
+    height: 35px;
+    display: flex;
+    width: 110px;
+    margin-right: 40px;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.input_incrementation button {
+    height: 100%;
+    width: 55px;
+    border: none;
+    cursor: pointer;
+}
+
+.input_incrementation .decr {
+    border-right: 1px solid #757575;
+}
+
+.input_incrementation .incr {
+    border-left: 1px solid #757575;
+}
+
+.input_incrementation input {
+    border: none;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.modal_content .added_product_card .added_card_delete {
+    width: 200px;
+    border-left: 0.5px solid rgb(148, 148, 148);
+    position: relative;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.modal_content .added_product_card .added_card_delete img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 25px;
+}
+
+.modal_content .added_product_card .added_card_delete img:last-child {
+    z-index: -1;
+}
+
+.modal_content .added_product_card .added_card_delete:hover {
+    background-color: #FF8282;
+}
+
+.modal_content .added_product_card .added_card_delete:hover img:last-child {
+    z-index: 5;
 }
 
 

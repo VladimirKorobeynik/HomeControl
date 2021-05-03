@@ -1,3 +1,29 @@
+///////// TEST 
+
+async function getProductData() {
+    let response = await fetch('http://localhost/web/product.php');
+
+    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+        // получаем тело ответа (см. про этот метод ниже)
+        let data = await response.json();
+        sessionStorage.setItem('productData', JSON.stringify(data));
+    } else {
+        alert("Ошибка HTTP: " + response.status);
+    }
+}
+getProductData();
+
+let responseData = JSON.parse(sessionStorage.getItem('productData'));
+
+// console.log(responseData);
+
+let products = new Products(responseData);
+let cart = new Cart();
+
+products.outProduct();
+
+/////////////
+
 //Categories select 
 let categories = document.getElementById('categBlock');
 let categoriesMore = document.getElementById('categMore');
@@ -313,138 +339,83 @@ coverBlockFilter.onclick = function() {
     bodyMarketplace.style.overflow = "visible";
 }
 
-//GOOGLE PAY
-function openModal() {
-    let moda = document.getElementById('modal');
-    moda.style.display = "flex";
-}
+//Open cart
+arrCardProduct.map((elem, index) => elem
+    .childNodes[1]
+    .childNodes[7]
+    .childNodes[3]
+    .addEventListener('click', function() {
+        //Cart fly adding animation 
+        let img = elem.childNodes[1].childNodes[1].childNodes[1];
+        $(img).clone().css({
+            'position': 'absolute',
+            'z-index': 1000,
+            'width': '20%',
+            'left': $(img).offset()['left'],
+            'top': $(img).offset()['top'],
+            'border-radius': '20px',
 
-const baseRequest = {
-    apiVersion: 2,
-    apiVersionMinor: 0
-};
+        }).appendTo('.fly_product').animate({
+            top: $('.cart_block').offset()['top'],
+            left: $('.cart_block').offset()['left'],
+            opacity: 0,
+            width: 40
+        }, 1000, function() {
+            $(this).remove();
+            $('.added_product_messagebox').show().animate({
+                top: 100,
+                opacity: 1
+            });
+        });
+        setTimeout(function() {
+            $('.added_product_messagebox').fadeOut(500).animate({
+                top: 0,
+                opacity: 0
+            })
+        }, 2000);
+        setTimeout(function() {
+            document.getElementById('cartCounter').innerHTML = +document.getElementById('cartCounter').innerHTML + 1;
+        }, 1000);
 
-
-const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
-
-
-const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
-
-
-const tokenizationSpecification = {
-    type: 'PAYMENT_GATEWAY',
-    parameters: {
-        'gateway': 'example',
-        'gatewayMerchantId': 'exampleGatewayMerchantId'
-    }
-};
-
-
-const baseCardPaymentMethod = {
-    type: 'CARD',
-    parameters: {
-        allowedAuthMethods: allowedCardAuthMethods,
-        allowedCardNetworks: allowedCardNetworks
-    }
-};
-
-
-const cardPaymentMethod = Object.assign({},
-    baseCardPaymentMethod, {
-        tokenizationSpecification: tokenizationSpecification
-    }
+        //Adding to cart
+        cart.addProduct(products.getProduct(index));
+    })
 );
 
-
-let paymentsClient = null;
-
-
-function getGoogleIsReadyToPayRequest() {
-    return Object.assign({},
-        baseRequest, {
-            allowedPaymentMethods: [baseCardPaymentMethod]
-        }
-    );
+//Cart open event
+document.getElementById('cartLink').onclick = function() {
+    modalControl(document.getElementById('cart'), 'cart');
 }
 
-
-function getGooglePaymentDataRequest() {
-    const paymentDataRequest = Object.assign({}, baseRequest);
-    paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
-    paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
-    paymentDataRequest.merchantInfo = {
-
-        merchantName: 'Example Merchant'
-    };
-    return paymentDataRequest;
-}
-
-
-function getGooglePaymentsClient() {
-    if (paymentsClient === null) {
-        paymentsClient = new google.payments.api.PaymentsClient({ environment: 'TEST' });
+//Function modal control
+function modalControl(modal, modalName) {
+    if (modalName == 'cart') {
+        modal.parentElement.style.display = "block";
+        cart.outProductInCart();
     }
-    return paymentsClient;
+
+    let overlay = document.querySelector('.modal_bg');
+
+    modal.childNodes[1].childNodes[3].onclick = function() {
+        hideModal(modal);
+    }
+
+    overlay.classList.add('modal_bg_active');
+    modal.style.display = 'block';
+
+    overlay.addEventListener('click', function() {
+        hideModal(modal);
+    });
+
+    document.body.addEventListener('keyup', function(e) {
+        if (e.keyCode == 27) {
+            hideModal(modal);
+        }
+    });
 }
 
-
-function onGooglePayLoaded() {
-    const paymentsClient = getGooglePaymentsClient();
-    paymentsClient.isReadyToPay(getGoogleIsReadyToPayRequest())
-        .then(function(response) {
-            if (response.result) {
-                addGooglePayButton();
-
-            }
-        })
-        .catch(function(err) {
-            console.error(err);
-        });
-}
-
-
-function addGooglePayButton() {
-    const paymentsClient = getGooglePaymentsClient();
-    const button = paymentsClient.createButton({ onClick: onGooglePaymentButtonClicked });
-    document.getElementById('kirich').appendChild(button);
-}
-
-
-function getGoogleTransactionInfo() {
-    return {
-        countryCode: 'US',
-        currencyCode: 'USD',
-        totalPriceStatus: 'FINAL',
-        totalPrice: '1.00'
-    };
-}
-
-
-function prefetchGooglePaymentData() {
-    const paymentDataRequest = getGooglePaymentDataRequest();
-    paymentDataRequest.transactionInfo = {
-        totalPriceStatus: 'NOT_CURRENTLY_KNOWN',
-        currencyCode: 'USD'
-    };
-    const paymentsClient = getGooglePaymentsClient();
-    paymentsClient.prefetchPaymentData(paymentDataRequest);
-}
-
-function onGooglePaymentButtonClicked() {
-    const paymentDataRequest = getGooglePaymentDataRequest();
-    paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
-
-    const paymentsClient = getGooglePaymentsClient();
-    paymentsClient.loadPaymentData(paymentDataRequest)
-        .then(function(paymentData) {
-            processPayment(paymentData);
-        })
-        .catch(function(err) {
-            console.error(err);
-        });
-}
-
-function processPayment(paymentData) {
-    console.log(paymentData);
-    paymentToken = paymentData.paymentMethodData.tokenizationData.token;
+function hideModal(modal) {
+    let overlay = document.querySelector('.modal_bg');
+    modal.style.display = 'none';
+    overlay.classList.remove('modal_bg_active');
 }
