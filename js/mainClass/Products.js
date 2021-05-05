@@ -1,5 +1,4 @@
 class Products {
-    productContainer = [];
 
     constructor(arr) {
         this.productContainer = arr;
@@ -17,10 +16,12 @@ class Products {
             mode = 'card_mode_tile_long'
         }
 
-        mainCardGrid.innerHTML = '';
+        if (this.productContainer != null) {
 
-        this.productContainer.forEach(elem => {
-            mainCardGrid.innerHTML += `
+            mainCardGrid.innerHTML = '';
+
+            this.productContainer.forEach(elem => {
+                mainCardGrid.innerHTML += `
             <div class="card_wrapper ${mode}">
                 <div class="card">
                     <div class="product_image">
@@ -44,7 +45,8 @@ class Products {
                     </div>
                 </div>
             </div>`;
-        });
+            });
+        }
 
     }
 
@@ -55,4 +57,10 @@ class Products {
     searchProduct() {
 
     }
+
+    updateData(arr) {
+        this.productContainer = arr;
+    }
 }
+
+export default Products;

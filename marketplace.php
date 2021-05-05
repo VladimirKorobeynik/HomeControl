@@ -11,6 +11,7 @@
 </head>
 
 <body id="bodyMarketplace">
+    <!-- preloader -->
     <div class="preloader" id="preloader">
         <div class="loader">
             <img src="photo/house.png" alt="">
@@ -18,11 +19,14 @@
             <img src="photo/loaderGear.png" class="smallGear" alt="">
         </div>
     </div>
+    <!-- cart messagebox -->
     <div class="added_product_messagebox">
         <span>Товар добавлен в корзину :)</span>
     </div>
     <div class="fly_product"></div>
+    <!-- cover block modal -->
     <div class="modal_bg"></div>
+    <!-- cart modal -->
     <div class="modal" id="cart">
         <div class="modal_head">
             <h2>Ваша Корзина</h2>
@@ -37,12 +41,39 @@
                     <p>Итоговая сумма:</p>
                     <span class="total_price" id="totalCost">4000грн</span>
                 </div>
-                <button class="create_order_btn standart_btn">Оформить заказ</button>
+                <button class="create_order_btn standart_btn" id="checkout">Оформить заказ</button>
             </div>
         </div>
     </div>
-    <div class="cover_block" id="coverBlock"></div>
+    <!-- order modal -->
+    <div class="modal order_modal" id="order">
+        <div class="modal_head">
+            <h2>Ваш заказ</h2>
+            <span class="close_icon"><img src="photo/closeIconBlack.png" alt="X"></span>
+        </div>
+        <div class="modal_content">
+            <div class="order_product" id="orderProductsBlock">
+
+            </div>
+            <div class="warning_block">
+                <div class="warning_text">
+                    <h3>УВАГА!</h3>
+                    <p><span class="danger_text">перевіряйте ваші дані</span> перед оплатою замовлення!!!</p>
+                </div>
+                <div class="warning_img">
+                    <img src="photo/warningIcon.png" alt="">
+                </div>
+            </div>
+            <div class="buy_block_cart buy_block_order" id="orderPay">
+                <div class="total_price_block">
+                    <p>Итоговая сумма:</p>
+                    <span class="total_price" id="totalPriceOrder">4000грн</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="cover_block" id="coverBlockFilter"></div>
+    <!-- mobile filter -->
     <div class="filter_block filter_mobile block_theme" id="filterMob">
         <div class="inner_filter">
             <h3>Filter</h3>
@@ -104,67 +135,8 @@
         </div>
     </div>
     <div class="wrapper">
-        <header class="header_marketplace" id="header">
-            <div class="header_inner">
-                <div class="header_logo">
-                    <a class="logo_link" href="marketplace.php">
-                        <div class="logo-block">
-                            <img src="photo/MainLogo.png" alt="">
-                        </div>
-                        <h5>Home Control</h5>
-                    </a>
-                </div>
-                <div class="burger_menu">
-                    <input type="checkbox" id="burgerMenu">
-                    <label for="burgerMenu">
-                        <div class="burger_line first_line"></div>
-                        <div class="burger_line second_line"></div>
-                        <div class="burger_line third_line"></div>
-                        <div class="burger_line fourth_line"></div>
-                    </label>
-                </div>
-                <div class="search_block">
-                    <input type="text" id="searchField" placeholder="Search ...">
-                    <img src="photo/searchIcon.png" alt="">
-                </div>
-                <nav class="nav">
-                    <a class="nav_link" href="marketplace.php">Home</a>
-                    <a class="nav_link" href="index.php">Our company</a>
-                    <a class="nav_link" href="marketplace.php">Contacts</a>
-                    <div class="user_block">
-                        <a href="#">
-                            <div class="user_img">
-                                <img src="photo/UserAvatar.png" alt="">
-                                <span class="notification"><span>9+</span></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="cart_block" id="cartLink">
-                        <img src="photo/shopingCartIcon.png" alt="">
-                        <span class="notification"><span id="cartCounter">0</span></span>
-                    </div>
-                </nav>
-            </div>
-            <div class="nav_side" id="navSide">
-                <div class="nav_head">
-                    <div class="user_block">
-                        <a href="#">
-                            <div class="user_img">
-                                <img src="photo/UserAvatar.png" alt="">
-                                <span class="notification"><span>9+</span></span>
-                            </div>
-                            <p>user</p>
-                        </a>
-                    </div>
-                    <div class="close_side_nav" id="closeNavSide"><img src="photo/closeIcon.png" alt=""></div>
-                </div>
-                <div class="nav_body">
-                    <a class="nav_link" href="marketplace.php">Home</a>
-                    <a class="nav_link" href="index.php">Our company</a>
-                    <a class="nav_link" href="marketplace.php">Contacts</a>
-                </div>
-            </div>
-        </header>
+
+        <?php include 'parts/marketplaceHeader.php' ?>
 
         <main>
             <div class="main_content">
@@ -460,10 +432,12 @@
     <script src="js/jquery.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/loader.js"></script>
-    <script src="js/google_pay.js"></script>
-    <script src="js/Products.js"></script>
-    <script src="js/Cart.js"></script>
-    <script src="js/marketplace_page.js"></script>
+    <script src="js/API/google_pay.js"></script>
+    <!-- <script src="js/Products.js"></script>
+    <script src="js/Order.js"></script>
+    <script src="js/Cart.js"></script> -->
+    <script src="js/burgerNavigation.js"></script>
+    <script type="module" src="js/marketplace_page.js"></script>
     <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
 
 </body>

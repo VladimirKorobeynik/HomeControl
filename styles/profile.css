@@ -1,0 +1,152 @@
+/* Content */
+
+main {
+    min-height: 100vh;
+}
+
+.main_account_content {
+    display: flex;
+}
+
+.main_account_content .sidebar_account {
+    width: 350px;
+    margin-right: 30px;
+}
+
+.main_account_content .account_content {
+    margin-left: 30px;
+    width: calc(100% - 410px);
+}
+
+
+/* .bg_file {
+    position: relative;
+} */
+
+.bg_file img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.bg_file h3 {
+    position: absolute;
+    color: #6F7587;
+    font-size: 20px;
+    top: 18px;
+    left: 28px;
+}
+
+
+/* Sidebar */
+
+.sidebar_account {
+    height: 100%;
+}
+
+.sidebar_account .sidebar_head {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+}
+
+.sidebar_account .sidebar_head .sidebar_image {
+    margin-right: 25px;
+}
+
+.sidebar_account .sidebar_head .sidebar_text p:first-child {
+    font-size: 23px;
+}
+
+.sidebar_account .sidebar_body .account_menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar_account .sidebar_body .account_menu li {
+    color: #000;
+    font-weight: bold;
+}
+
+.sidebar_account .sidebar_body .account_menu li:hover {
+    background-color: #c2c2c2;
+}
+
+.sidebar_account .sidebar_body .account_menu li a {
+    height: 100%;
+    width: 100%;
+    padding: 20px 30px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.sidebar_account .sidebar_body .account_menu .active_li {
+    background-color: #505050;
+}
+
+.sidebar_account .sidebar_body .account_menu .active_li a {
+    color: #fff;
+}
+
+.sidebar_account .sidebar_body .account_menu li:last-child a {
+    color: #FF6363;
+}
+
+
+/* Account info */
+
+.account_info .account_head_info {
+    position: relative;
+}
+
+.account_info .account_head_content {
+    height: 210px;
+    padding: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+}
+
+.account_info .account_head_content_top {
+    margin-bottom: 20px;
+}
+
+.account_info .account_head_content_top h2::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: #FFC672;
+    margin-top: 2px;
+}
+
+.account_info .account_head_content_content {
+    display: flex;
+}
+
+.account_info .account_head_content_content .user_image_block {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #6F7587;
+    margin-right: 40px;
+}
+
+.account_info .account_head_content_content .user_image_block img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.account_info .account_head_content_content .user_login_block {
+    font-size: 18px;
+    font-weight: bold;
+    color: #6F7587;
+}
+
+.account_info .account_head_content_content .user_login {
+    color: #000;
+    margin-top: 20px;
+}

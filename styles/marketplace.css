@@ -110,6 +110,7 @@ html::-webkit-scrollbar {
 .block_theme {
     border-radius: 25px;
     box-shadow: 0px 0px 25px rgba(69, 69, 69, 0.25);
+    background-color: #ffff;
 }
 
 .cover_block {
@@ -1193,7 +1194,7 @@ html::-webkit-scrollbar {
 /* Modal window */
 
 .modal_bg {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100vh;
     top: 0;
@@ -1203,7 +1204,7 @@ html::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
     z-index: 100;
-    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .modal_bg_active {
@@ -1407,6 +1408,109 @@ html::-webkit-scrollbar {
 
 .modal_content .added_product_card .added_card_delete:hover img:last-child {
     z-index: 5;
+}
+
+.order_modal {
+    width: 500px;
+    min-height: 400px;
+}
+
+.order_modal .order_product {
+    height: 300px;
+    overflow: scroll;
+    margin-bottom: 30px;
+}
+
+.order_modal .warning_block {
+    background-color: #FF8D8D;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.order_modal .warning_block .warning_text h3 {
+    color: #AE3D3D;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.order_modal .warning_block .warning_text p {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.order_modal .warning_block .warning_text span {
+    text-transform: uppercase;
+}
+
+.order_modal .warning_block .warning_img {
+    width: 148px;
+    height: 90px;
+    overflow: hidden;
+}
+
+.order_modal .buy_block_order {
+    margin-left: 0px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.order_modal .gpay-card-info-container.black.long {
+    min-width: 100%;
+}
+
+.order_product_card {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #BFBFBF;
+    margin-bottom: 20px;
+}
+
+.order_product_card .product_image {
+    margin-right: 10px;
+}
+
+.order_product_card .product_content {
+    width: 100%;
+}
+
+.order_product_card .product_name {
+    margin-bottom: 20px;
+}
+
+.order_product_card .product_name p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.order_product_card .order_price_block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order_product_card .order_price_block {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.order_product_card .order_price_block .count_price {
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.order_product_card .order_price_block .count_price .devider {
+    width: 15px;
+    height: 2px;
+    border-radius: 5px;
+    background-color: rgb(163, 163, 163);
 }
 
 

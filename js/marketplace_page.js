@@ -1,3 +1,8 @@
+//Class
+import Products from './mainClass/Products.js';
+import Cart from './mainClass/Cart.js';
+import Order from './mainClass/Order.js';
+
 ///////// TEST 
 
 async function getProductData() {
@@ -288,37 +293,9 @@ $(document).ready(function() {
     });
 });
 
-//Burger menu
-let bodyMarketplace = document.getElementById('bodyMarketplace');
-let burger = document.getElementById('burgerMenu');
-let navSide = document.getElementById('navSide');
-let closeBtn = document.getElementById('closeNavSide');
-let coverBlock = document.getElementById('coverBlock');
-
-burger.onchange = function() {
-    if (burger.checked) {
-        coverBlock.style.zIndex = 15;
-        coverBlock.style.opacity = 1;
-        navSide.style.minWidth = "300px";
-        navSide.style.maxWidth = "300px";
-        bodyMarketplace.style.overflow = "hidden";
-    }
-}
-
-closeBtn.onclick = () => closeSideNav();
-
-coverBlock.onclick = () => closeSideNav();
-
-function closeSideNav() {
-    burger.checked = !burger.checked;
-    coverBlock.style.zIndex = -10;
-    coverBlock.style.opacity = 0;
-    navSide.style.minWidth = "0px";
-    navSide.style.maxWidth = "0px";
-    bodyMarketplace.style.overflow = "visible";
-}
 
 //Filter mobile
+let bodyMarketplace = document.getElementById('bodyMarketplace');
 let filterMobileBtn = document.getElementById('filterActiveBtn');
 let filterMob = document.getElementById('filterMob');
 let coverBlockFilter = document.getElementById('coverBlockFilter');
@@ -347,6 +324,9 @@ arrCardProduct.map((elem, index) => elem
     .addEventListener('click', function() {
         //Cart fly adding animation 
         let img = elem.childNodes[1].childNodes[1].childNodes[1];
+
+        let cartElement = (window.innerWidth < 1080) ? '.burger_menu' : '.cart_block';
+
         $(img).clone().css({
             'position': 'absolute',
             'z-index': 1000,
@@ -356,8 +336,8 @@ arrCardProduct.map((elem, index) => elem
             'border-radius': '20px',
 
         }).appendTo('.fly_product').animate({
-            top: $('.cart_block').offset()['top'],
-            left: $('.cart_block').offset()['left'],
+            top: $(cartElement).offset()['top'],
+            left: $(cartElement).offset()['left'],
             opacity: 0,
             width: 40
         }, 1000, function() {
@@ -387,11 +367,29 @@ document.getElementById('cartLink').onclick = function() {
     modalControl(document.getElementById('cart'), 'cart');
 }
 
+document.getElementById('cartLinkSide').onclick = function() {
+    modalControl(document.getElementById('cart'), 'cart');
+}
+
+//Order open event
+document.getElementById('checkout').onclick = function() {
+    if (cart.getCountAddedProduct() > 0) {
+        hideModal(document.getElementById('cart'));
+        modalControl(document.getElementById('order'), 'order');
+
+        let userOrder = new Order(true, Date.now, cart.cartContainer);
+        document.getElementById('totalPriceOrder').innerHTML = userOrder.getTotalCost() + 'грн';
+        userOrder.outOrderDetails();
+    }
+}
+
 //Function modal control
 function modalControl(modal, modalName) {
     if (modalName == 'cart') {
-        modal.parentElement.style.display = "block";
         cart.outProductInCart();
+    }
+    if (modalName == 'order') {
+
     }
 
     let overlay = document.querySelector('.modal_bg');
@@ -419,3 +417,27 @@ function hideModal(modal) {
     modal.style.display = 'none';
     overlay.classList.remove('modal_bg_active');
 }
+
+// Search
+let searchField = document.getElementById('searchField');
+
+// searchField.addEventListener('keyup', function(e) {
+//     if (e.keyCode == 13) {
+//         let data = {
+//             "searchValue": searchField.value,
+//         };
+//         fetch('http://localhost/web/product.php', {
+//                 method: 'POST',
+//                 headers: {
+//                     "Content-Type": "application/json"
+//                 },
+//                 body: JSON.stringify(data)
+//             })
+//             .then(response => response.json())
+//             .then(response => {
+//                 console.log(response);
+//                 // products.updateData(response);
+//                 // products.outProduct();
+//             });
+//     }
+// })

@@ -73,7 +73,7 @@ function onGooglePayLoaded() {
 function addGooglePayButton() {
     const paymentsClient = getGooglePaymentsClient();
     const button = paymentsClient.createButton({ onClick: onGooglePaymentButtonClicked });
-    // document.getElementById('cart').appendChild(button);
+    document.getElementById('orderPay').appendChild(button);
 }
 
 function getGoogleTransactionInfo() {

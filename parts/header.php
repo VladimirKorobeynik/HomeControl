@@ -23,13 +23,6 @@
             <a class="nav_link" id="about" href="index.php#us">About Us</a>
             <a class="nav_link" href="Contacts.php">Contacts</a>
             <a class="nav_link" href="marketplace.php">Marketplace</a>
-            <?php
-            if ($_COOKIE['user'] == '') :
-            ?>
-                <a class="nav_link" href="../Login.php">Login</a>
-            <?php else : ?>
-                <?= $_COOKIE[''] ?><a href="../web/exit.php" class="exit_link">Log out</a>
-            <?php endif; ?>
         </nav>
     </div>
     <div class="mobile_nav" id="mobMenu">
@@ -38,12 +31,5 @@
         <a class="nav_link" id="about" href="index.php#us">About Us</a>
         <a class="nav_link" href="Contacts.php">Contacts</a>
         <a class="nav_link" href="marketplace.php">Marketplace</a>
-        <?php
-        if ($_COOKIE['user'] == '') :
-        ?>
-            <a class="nav_link" href="../Login.php">Login</a>
-        <?php else : ?>
-            <?= $_COOKIE[''] ?><a href="../web/exit.php" class="exit_link">Log out</a>
-        <?php endif; ?>
     </div>
 </header>

@@ -54,7 +54,7 @@
 </body>
 <script src="js/loader.js"></script>
 <script src="js/header.js"></script>
-<script src="js/google_map.js"></script>
+<script src="js/API/google_map.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAMQ9lQs2wpePuFyCso5eT4SCJiveur0I&callback=initMap&libraries=&v=weekly">
 </script>
 
