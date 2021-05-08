@@ -121,10 +121,10 @@
 
                 setcookie('user', $secret_name, time() + 3600, "/");
 
-                header('Location: ../profile.php');
+                header('Location: ../marketplace.php');
             } else {
                 setcookie('user', $secret_name, time() + 3600, "/");
-                header('Location: ../profile.php');
+                header('Location: ../marketplace.php');
             }
             if (isset($userInfo['id'])) {
 

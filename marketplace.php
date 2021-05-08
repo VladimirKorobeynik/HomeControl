@@ -433,9 +433,6 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/API/google_pay.js"></script>
-    <!-- <script src="js/Products.js"></script>
-    <script src="js/Order.js"></script>
-    <script src="js/Cart.js"></script> -->
     <script src="js/burgerNavigation.js"></script>
     <script type="module" src="js/marketplace_page.js"></script>
     <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>

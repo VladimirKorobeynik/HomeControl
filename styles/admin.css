@@ -1,0 +1,126 @@
+main {
+    min-height: 100vh;
+}
+
+.control_content_panel .panel_head {
+    margin-bottom: 0;
+}
+
+.add_product_block .add_product_button {
+    padding: 10px 20px;
+    height: 100%;
+}
+
+.setting_filter h3 {
+    padding-left: 30px;
+}
+
+
+/* Product content */
+
+.card_object_grid {
+    width: 100%;
+    border-spacing: 0px 25px;
+}
+
+.card_object {
+    overflow: hidden;
+    box-shadow: 0px 0px 15px rgb(69 69 69 / 25%);
+}
+
+.card_object td {
+    text-align: center;
+}
+
+.card_object .object_image {
+    width: 100px;
+    height: 100px;
+    overflow-y: hidden;
+}
+
+.card_object .object_image img {
+    max-width: 75%;
+    max-height: 75%;
+}
+
+.card_object .object_control_panel {
+    border-radius: 0 25px 25px 0;
+    border-left: 1px solid #D7D7D7;
+}
+
+.card_object .object_control_panel .control_block {
+    display: flex;
+    justify-content: center;
+}
+
+.card_object .object_control_panel .control_block a {
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 30px;
+    margin: 0 15px;
+}
+
+.card_object .object_control_panel .control_block a:first-child:hover {
+    color: #009688;
+}
+
+.card_object .object_control_panel .control_block a:last-child:hover {
+    color: #FF383F;
+}
+
+.card_object .object_control_panel img {
+    height: 100%;
+}
+
+.card_object .object_image {
+    border-radius: 25px 0 0 25px;
+}
+
+.card_object_grid .object_attribute {
+    color: gray;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.card_object_grid .object_attribute tr td:nth-child(6) {
+    width: 110px;
+}
+
+#editObject {
+    margin-top: 3px;
+}
+
+
+/* modal */
+
+.addModal {
+    height: 650px;
+    width: 500px;
+}
+
+.field_block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.field_block label {
+    margin-bottom: 5px;
+}
+
+.field_block .input_form {
+    height: 30px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding-left: 10px;
+}
+
+#addFieldDescription {
+    height: 135px;
+    resize: none;
+    outline: none;
+    padding: 8px;
+    border-radius: 10px;
+}

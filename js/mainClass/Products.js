@@ -50,6 +50,45 @@ class Products {
 
     }
 
+    outProductAdmin() {
+        let objectGrid = document.getElementById('objectGrid');
+
+        if (this.productContainer != null) {
+
+            objectGrid.innerHTML = '';
+
+            this.productContainer.forEach(elem => {
+                objectGrid.innerHTML += `
+                <tr class="card_object block_theme">
+                    <td class="object_image">
+                        <img src="${elem.image}" alt="">
+                    </td>
+                    <td class="object_name">
+                        <p>${elem.name}</p>
+                    </td>
+                    <td class="object_categotie">
+                        <p>Устройства</p>
+                    </td>
+                    <td class="object_type">
+                        <p>${elem.type}</p>
+                    </td>
+                    <td class="object_count">
+                        <p>${elem.count} шт.</p>
+                    </td>
+                    <td class="object_price">
+                        <p>${elem.price}грн</p>
+                    </td>
+                    <td class="object_control_panel">
+                        <div class="control_block">
+                            <a href="#" id="editObject"><i class="fa fa-edit edit-icon"></i></a>
+                            <a href="#" id="deleteObject"><i class="fa fa-times delete-icon"></i></a>
+                        </div>
+                    </td>
+                </tr>`
+            });
+        }
+    }
+
     getProduct(index) {
         return this.productContainer[index];
     }

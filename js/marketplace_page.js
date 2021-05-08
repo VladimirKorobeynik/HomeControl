@@ -3,6 +3,9 @@ import Products from './mainClass/Products.js';
 import Cart from './mainClass/Cart.js';
 import Order from './mainClass/Order.js';
 
+//functions
+import { sidebarBlockShow, selectOption, setRightValue, setLeftValue } from './marketplaceEventHandler.js';
+
 ///////// TEST 
 
 async function getProductData() {
@@ -36,55 +39,16 @@ let categoriesArrow = document.getElementById('arrowCateg');
 
 let arrCategOption = document.getElementsByClassName('option_categories');
 
-categoriesMore.style.maxHeight = categoriesMore.scrollHeight + "px";
-categoriesArrow.style.transform = "rotate(0deg)";
-categories.addEventListener('click', function() {
-    if (categoriesMore.style.maxHeight) {
-        categoriesMore.style.maxHeight = null;
-        categoriesArrow.style.transform = "rotate(-90deg)";
-    } else {
-        categoriesMore.style.maxHeight = categoriesMore.scrollHeight + "px";
-        categoriesArrow.style.transform = "rotate(0deg)";
-    }
-});
+sidebarBlockShow(categories, categoriesMore, categoriesArrow);
 
-let oldSelected;
-for (let i = 0; i < arrCategOption.length; i++) {
-    arrCategOption[i].addEventListener('click', function() {
-        let selectedElem = i;
-        let countSelectedElem = document.getElementsByClassName('selected_categ_option');
-
-        if (countSelectedElem.length == 0) {
-            arrCategOption[selectedElem].classList.add('selected_categ_option');
-            oldSelected = selectedElem;
-        } else if (selectedElem == oldSelected) {
-            arrCategOption[oldSelected].classList.remove('selected_categ_option');
-        } else {
-            arrCategOption[oldSelected].classList.remove('selected_categ_option');
-            arrCategOption[selectedElem].classList.add('selected_categ_option');
-            oldSelected = selectedElem;
-        }
-    });
-}
+selectOption(arrCategOption);
 
 //Filter
 let filter = document.getElementById('filterBlock');
 let filterMore = document.getElementById('moreFilter');
 let filterArrow = document.getElementById('filterCateg');
 
-filterMore.style.maxHeight = filterMore.scrollHeight + "px";
-filterArrow.style.transform = "rotate(0deg)";
-
-filter.addEventListener('click', function() {
-    if (filterMore.style.maxHeight) {
-        filterMore.style.maxHeight = null;
-        filterArrow.style.transform = "rotate(-90deg)";
-    } else {
-        filterMore.style.maxHeight = filterMore.scrollHeight + "px";
-        filterArrow.style.transform = "rotate(0deg)";
-    }
-});
-
+sidebarBlockShow(filter, filterMore, filterArrow);
 
 //Filter slider
 let leftInput;
@@ -121,51 +85,24 @@ if (window.innerWidth > 1080) {
 
 minPriceInput.onblur = function() {
     leftInput.value = minPriceInput.value;
-    setLeftValue();
+    setLeftValue(leftInput, rightInput, leftTumbler, range, minPriceInput);
 }
 
 maxPriceInput.onblur = function() {
     rightInput.value = maxPriceInput.value;
-    setRightValue();
+    setRightValue(leftInput, rightInput, rightTumbler, range, maxPriceInput);
 }
 
-function setLeftValue() {
-    let field = leftInput;
-    let min = parseInt(field.min);
-    let max = parseInt(field.max);
+setLeftValue(leftInput, rightInput, leftTumbler, range, minPriceInput);
 
-    field.value = Math.min(parseInt(field.value), parseInt(rightInput.value) - 1);
+setRightValue(leftInput, rightInput, rightTumbler, range, maxPriceInput);
 
-    let percent = ((field.value - min) / (max - min)) * 100;
-
-    leftTumbler.style.left = percent + '%';
-    range.style.left = percent + '%';
-
-    minPriceInput.value = field.value;
-}
-
-setLeftValue();
-
-function setRightValue() {
-    let field = rightInput;
-    let min = parseInt(field.min);
-    let max = parseInt(field.max);
-
-    field.value = Math.max(parseInt(field.value), parseInt(leftInput.value));
-
-    let percent = ((field.value - min) / (max - min)) * 100;
-
-    rightTumbler.style.right = (100 - percent) + '%';
-    range.style.right = (100 - percent) + '%';
-
-    maxPriceInput.value = field.value;
-
-}
-
-setRightValue();
-
-leftInput.addEventListener('input', setLeftValue);
-rightInput.addEventListener('input', setRightValue);
+leftInput.addEventListener('input', function() {
+    setLeftValue(leftInput, rightInput, leftTumbler, range, minPriceInput)
+});
+rightInput.addEventListener('input', function() {
+    setRightValue(leftInput, rightInput, rightTumbler, range, maxPriceInput)
+});
 
 leftInput.addEventListener('mouseover', function() {
     leftTumbler.classList.add('hover');
