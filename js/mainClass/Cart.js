@@ -1,6 +1,7 @@
 class Cart {
     cartContainer = [];
 
+    //Adding products to cart
     addProduct(productObj) {
         let dublicate = 0
 
@@ -16,10 +17,21 @@ class Cart {
         }
     }
 
+    //Loading of the added products from the localStorage
+    loadCurrentProduct() {
+        let basketData = JSON.parse(localStorage.getItem('basketArray'));
+        if (basketData != null) {
+            this.cartContainer = basketData;
+            this.updateCartCounter(this.getCountAddedProduct(), true);
+        }
+    }
+
+    //Create order
     createOrder() {
 
     }
 
+    //Removing a product from cart
     deleteProduct(index) {
         let newCartContainer = [];
         this.cartContainer.map((elem, indexElem) => {
@@ -30,12 +42,15 @@ class Cart {
             }
         });
         this.cartContainer = newCartContainer;
+        localStorage.setItem('basketArray', JSON.stringify(this.cartContainer));
     }
 
+    //Get count products in cart
     getCountAddedProduct() {
         return this.cartContainer.length;
     }
 
+    //Calculate cart total cost 
     calculateTotalCost() {
         let totalCost = 0;
         if (this.cartContainer.length > 0)
@@ -45,6 +60,7 @@ class Cart {
         return totalCost;
     }
 
+    //Out product in cart
     outProductInCart() {
         let cartOutContainer = document.getElementById('addedCardGrid');
         let totalCostContainer = document.getElementById('totalCost');
@@ -100,11 +116,13 @@ class Cart {
                 let totalCostOneProduct = arrAddedproduct[i].childNodes[3].childNodes[3].childNodes[3].childNodes[1];
                 let obj = this;
 
+                //Delete products from cart
                 deleteBtn.onclick = function() {
                     obj.deleteProduct(i);
                     obj.outProductInCart();
                 }
 
+                //Product count -1
                 decr.onclick = function() {
                     if (input.value > 1) {
                         input.value = +input.value - 1;
@@ -116,6 +134,7 @@ class Cart {
                     }
                 }
 
+                //Product count +1
                 incr.onclick = function() {
                     input.value = +input.value + 1;
                     obj.cartContainer[i].countBuy = obj.cartContainer[i].countBuy + 1;
@@ -133,6 +152,7 @@ class Cart {
         }
     }
 
+    //Update cart counter
     updateCartCounter(num, modeUpdate) {
         let cartCounter = document.getElementById('cartCounter');
         if (modeUpdate) {

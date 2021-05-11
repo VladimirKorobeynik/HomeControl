@@ -11,6 +11,7 @@ class Order {
         });
     }
 
+    //Out order data
     outOrderDetails() {
         let orderedProductBlock = document.getElementById('orderProductsBlock');
 
@@ -37,6 +38,7 @@ class Order {
         });
     }
 
+    //Calculate total cost
     getTotalCost() {
         let totalCostOrder = 0;
         this.arrDevices.forEach(element => {

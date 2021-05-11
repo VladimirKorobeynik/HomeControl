@@ -1,7 +1,7 @@
 //Class
 import Products from './mainClass/Products.js';
 
-//functions
+//Functions
 import { sidebarBlockShow, selectOption, setLeftValue, setRightValue } from './marketplaceEventHandler.js';
 
 async function getProductData() {
@@ -36,7 +36,6 @@ sidebarBlockShow(categoriesTable, categoriesTableMore, categoriesTableArrow);
 selectOption(arrCategOption);
 
 // Product filter
-
 let filterBlock = document.getElementById('filterBlockAdmin');
 let moreFilter = document.getElementById('moreFilterAdmin');
 let filterArrow = document.getElementById('filterArrowAdmin');
@@ -125,8 +124,20 @@ rightInput.addEventListener('mouseout', function() {
 });
 
 document.getElementById('addProductBtn').onclick = function() {
-
     modalControl(document.getElementById('addModal'), 'add');
+}
+
+//Edit event 
+let arrAdminCard = document.getElementsByClassName('card_object');
+let editObject;
+
+for (let i = 0; i < arrAdminCard.length; i++) {
+    let editItem = arrAdminCard[i].childNodes[13].childNodes[1].childNodes[1];
+
+    editItem.onclick = function() {
+        editObject = products.getProduct(i);
+        modalControl(document.getElementById('addModal'), 'edit');
+    }
 }
 
 //Function modal control
@@ -135,13 +146,25 @@ function modalControl(modal, modalName) {
 
     }
     if (modalName == 'edit') {
+        console.log(products.productContainer);
+        let inputForm = document.getElementsByClassName('input_form');
 
+        inputForm[0].value = editObject.name;
+        inputForm[1].value = editObject.categoriaName;
+        inputForm[2].value = editObject.type;
+        inputForm[3].value = editObject.count;
+        inputForm[4].value = editObject.price;
+        // inputForm[5].value = editObject.image;
+        // document.getElementById('addFieldPhoto') = editObject.image;
+        // console.log(editObject.image);
+        document.getElementById('addFieldDescription').value = editObject.description;
     }
 
     let overlay = document.querySelector('.modal_bg');
 
     modal.childNodes[1].childNodes[3].onclick = function() {
         hideModal(modal);
+        clearField();
     }
 
     overlay.classList.add('modal_bg_active');
@@ -149,17 +172,29 @@ function modalControl(modal, modalName) {
 
     overlay.addEventListener('click', function() {
         hideModal(modal);
+        clearField();
     });
 
     document.body.addEventListener('keyup', function(e) {
         if (e.keyCode == 27) {
             hideModal(modal);
+            clearField();
         }
     });
 }
 
+//Hide modal window
 function hideModal(modal) {
     let overlay = document.querySelector('.modal_bg');
     modal.style.display = 'none';
     overlay.classList.remove('modal_bg_active');
+}
+
+//Clear modal 
+function clearField() {
+    let inputForm = document.getElementsByClassName('input_form');
+    for (let i = 0; i < inputForm.length; i++) {
+        inputForm[i].value = '';
+    }
+    document.getElementById('addFieldDescription').value = '';
 }

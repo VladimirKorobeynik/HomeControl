@@ -28,7 +28,12 @@
         <nav class="nav">
             <a class="nav_link" href="marketplace.php">Home</a>
             <a class="nav_link" href="index.php">Our company</a>
-            <a class="nav_link" href="marketplace.php">Contacts</a>
+            <a class="nav_link" href="#" id="contactLink">Contacts</a>
+            <?php
+            if ($_COOKIE['user'] == md5("admin"."ghjfdkhgj453534$#@#")) :
+            ?>
+                <a class="nav_link admin_tool" href="admin.php"><img src="photo/adminTool.png" alt=""></a>
+            <?php endif; ?>
             <?php
             if ($_COOKIE['user'] == '') :
             ?>

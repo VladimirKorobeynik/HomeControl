@@ -1,3 +1,4 @@
+//Animation show block
 function sidebarBlockShow(mainBlock, moreBlock, arrow) {
     moreBlock.style.maxHeight = moreBlock.scrollHeight + "px";
     arrow.style.transform = "rotate(0deg)";
@@ -12,6 +13,7 @@ function sidebarBlockShow(mainBlock, moreBlock, arrow) {
     });
 }
 
+//Select option
 function selectOption(arrOption) {
     let oldSelected;
     for (let i = 0; i < arrOption.length; i++) {
@@ -33,6 +35,7 @@ function selectOption(arrOption) {
     }
 }
 
+//Left button slider
 function setLeftValue(leftInput, rightInput, leftTumbler, range, minPriceInput) {
     let field = leftInput;
     let min = parseInt(field.min);
@@ -48,6 +51,7 @@ function setLeftValue(leftInput, rightInput, leftTumbler, range, minPriceInput) 
     minPriceInput.value = field.value;
 }
 
+//Right button slider
 function setRightValue(leftInput, rightInput, rightTumbler, range, maxPriceInput) {
     let field = rightInput;
     console.log(field);
@@ -65,4 +69,22 @@ function setRightValue(leftInput, rightInput, rightTumbler, range, maxPriceInput
 
 }
 
-export { sidebarBlockShow, selectOption, setLeftValue, setRightValue };
+//Contacts
+function setEventContacts() {
+    document.getElementById('contactLink').onclick = function() {
+        let contactWindow = document.getElementById('contactWind');
+        let wrapperContacts = document.getElementById('wrapperContacts');
+
+        if (contactWindow.style.maxHeight) {
+            contactWindow.style.padding = "0 40px";
+            contactWindow.style.maxHeight = null;
+            wrapperContacts.classList.remove('active_contacts');
+        } else {
+            contactWindow.style.padding = "40px 40px";
+            contactWindow.style.maxHeight = contactWindow.scrollHeight + "px";
+            wrapperContacts.classList.add('active_contacts');
+        }
+    }
+}
+
+export { sidebarBlockShow, selectOption, setLeftValue, setRightValue, setEventContacts };

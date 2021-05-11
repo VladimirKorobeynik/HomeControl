@@ -3,8 +3,8 @@ import Products from './mainClass/Products.js';
 import Cart from './mainClass/Cart.js';
 import Order from './mainClass/Order.js';
 
-//functions
-import { sidebarBlockShow, selectOption, setRightValue, setLeftValue } from './marketplaceEventHandler.js';
+//Functions
+import { sidebarBlockShow, selectOption, setRightValue, setLeftValue, setEventContacts } from './marketplaceEventHandler.js';
 
 ///////// TEST 
 
@@ -27,6 +27,7 @@ let responseData = JSON.parse(sessionStorage.getItem('productData'));
 
 let products = new Products(responseData);
 let cart = new Cart();
+cart.loadCurrentProduct();
 
 products.outProduct();
 
@@ -196,7 +197,7 @@ selectHeader.forEach(element => {
     });
 });
 
-//Viewed Carousel
+//Viewed Carousel (owl-carousel)
 $(document).ready(function() {
     $(".owl-carousel").owlCarousel({
         items: 4,
@@ -296,6 +297,7 @@ arrCardProduct.map((elem, index) => elem
 
         //Adding to cart
         cart.addProduct(products.getProduct(index));
+        localStorage.setItem('basketArray', JSON.stringify(cart.cartContainer));
     })
 );
 
@@ -310,7 +312,7 @@ document.getElementById('cartLinkSide').onclick = function() {
 
 //Order open event
 document.getElementById('checkout').onclick = function() {
-    if (cart.getCountAddedProduct() > 0) {
+    if (cart.getCountAddedProduct() > 0 && document.cookie != '') {
         hideModal(document.getElementById('cart'));
         modalControl(document.getElementById('order'), 'order');
 
@@ -319,6 +321,8 @@ document.getElementById('checkout').onclick = function() {
         userOrder.outOrderDetails();
     }
 }
+
+setEventContacts();
 
 //Function modal control
 function modalControl(modal, modalName) {
@@ -349,6 +353,7 @@ function modalControl(modal, modalName) {
     });
 }
 
+//Hide modal window
 function hideModal(modal) {
     let overlay = document.querySelector('.modal_bg');
     modal.style.display = 'none';
@@ -358,23 +363,23 @@ function hideModal(modal) {
 // Search
 let searchField = document.getElementById('searchField');
 
-// searchField.addEventListener('keyup', function(e) {
-//     if (e.keyCode == 13) {
-//         let data = {
-//             "searchValue": searchField.value,
-//         };
-//         fetch('http://localhost/web/product.php', {
-//                 method: 'POST',
-//                 headers: {
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: JSON.stringify(data)
-//             })
-//             .then(response => response.json())
-//             .then(response => {
-//                 console.log(response);
-//                 // products.updateData(response);
-//                 // products.outProduct();
-//             });
-//     }
-// })
+searchField.addEventListener('keyup', function(e) {
+    if (e.keyCode == 13) {
+        let data = {
+            "searchValue": searchField.value,
+        };
+        fetch('http://localhost/web/product.php', {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                // products.updateData(response);
+                // products.outProduct();
+            });
+    }
+})

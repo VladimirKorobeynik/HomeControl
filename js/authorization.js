@@ -1,3 +1,8 @@
+//Functions
+import { setEventContacts } from './marketplaceEventHandler.js';
+
+setEventContacts();
+
 let logForm = document.getElementById("loginForm");
 let regForm = document.getElementById("registerForm");
 

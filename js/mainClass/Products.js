@@ -4,6 +4,7 @@ class Products {
         this.productContainer = arr;
     }
 
+    //Out product on page
     outProduct() {
         let mainCardGrid = document.getElementById('mainCardGrid');
         let cardMode1 = document.getElementById('mode1');
@@ -50,6 +51,7 @@ class Products {
 
     }
 
+    //Out product on page for admin
     outProductAdmin() {
         let objectGrid = document.getElementById('objectGrid');
 
@@ -67,7 +69,7 @@ class Products {
                         <p>${elem.name}</p>
                     </td>
                     <td class="object_categotie">
-                        <p>Устройства</p>
+                        <p>${elem.categoriaName}</p>
                     </td>
                     <td class="object_type">
                         <p>${elem.type}</p>
@@ -89,14 +91,17 @@ class Products {
         }
     }
 
+    //Get product item
     getProduct(index) {
         return this.productContainer[index];
     }
 
+    //Search product
     searchProduct() {
 
     }
 
+    //Update product data
     updateData(arr) {
         this.productContainer = arr;
     }

@@ -27,18 +27,12 @@
 
             <div class="contacts_block">
                 <div class="info_block">
-                    <div class="numbers">
-                        <p class="number_title">Numbers:</p>
-                        <div class="num">
-                            <p>+380964442312</p>
-                            <p>+380955443423</p>
-                        </div>
+                    <div class="body_info">
+                        <p>Адресс 1: г.Харьков, ул. Сумская 78</p>
+                        <p>Адресс 2: г.Харьков, ул. Сумская 78</p>
+                        <p>Номер телефона: +380967833412</p>
+                        <p>Почта: <a href="#">homecontrol2020@gmail.com</a></p>
                     </div>
-                    <div class="address_block">
-                        <span>Address:</span>
-                        <p class="address">Kharkiv, prospect 228, 7/9</p>
-                    </div>
-                    <a href="#" class="email">homecontrol2020@gmail.com</a>
                 </div>
                 <div class="map_block">
                     <div class="map" id="map">

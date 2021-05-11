@@ -15,10 +15,11 @@
     $role = $resultRole->fetch_assoc();
 
     if(count($user) > 0){
-        setcookie('user', $secret_name, time() + 3600, "/");
         if ($role['role_id'] == 1) {
+            setcookie('user', md5("admin"."ghjfdkhgj453534$#@#"), time() + 3600, "/");
             header('Location: ../admin.php');
         } else {
+            setcookie('user', $secret_name, time() + 3600, "/");
             header('Location: ../marketplace.php');
         }
     }

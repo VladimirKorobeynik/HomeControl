@@ -7,8 +7,7 @@ html {
 }
 
 #map {
-    width: 600px;
-    height: 400px;
+    height: 600px;
     border: 4px solid #FFB274;
     border-radius: 4px;
 }
@@ -27,12 +26,18 @@ main .container {
 
 .contacts_block {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-top: 20px
 }
 
 .info_block,
 .map_block {
     flex-basis: 50%;
+}
+
+.info_block {
+    margin-bottom: 20px;
 }
 
 .numbers {
@@ -60,4 +65,11 @@ main .container {
 .email:hover {
     background-color: #047F73;
     color: #DFDFDF;
+}
+
+.divider_contacts {
+    width: 200px;
+    height: 2px;
+    background-color: #FFB274;
+    margin: 20px auto;
 }

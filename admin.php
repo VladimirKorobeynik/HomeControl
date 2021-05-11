@@ -19,6 +19,8 @@
             <img src="photo/loaderGear.png" class="smallGear" alt="">
         </div>
     </div>
+    <!-- contacts window -->
+    <?php include 'parts/contactWindow.php' ?>
     <!-- cover block modal -->
     <div class="modal_bg"></div>
     <div class="modal addModal" id="addModal">
@@ -34,7 +36,7 @@
                 </div>
                 <div class="field_block">
                     <label for="addCategorie">Категория</label>
-                    <input type="text" class="input_form" id="addFieldCategorie" name="categorie">
+                    <input type="select" class="input_form" id="addFieldCategorie" name="categorie">
                 </div>
                 <div class="field_block">
                     <label for="addFieldType">Тип</label>
@@ -89,6 +91,7 @@
                     <img src="photo/searchIcon.png" alt="">
                 </div>
                 <nav class="nav">
+                    <a class="nav_link" href="marketplace.php">Магазин</a>
                     <a class="nav_link" href="#">Распечатать выборку</a>
                     <?php
                     if ($_COOKIE['user'] == '') :

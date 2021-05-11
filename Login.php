@@ -11,6 +11,8 @@
 
 <body>
     <?php include 'web/google_authorization.php' ?>
+    <!-- contacts window -->
+    <?php include 'parts/contactWindow.php' ?>
 
     <div class="preloader" id="preloader">
         <div class="loader">
@@ -135,7 +137,7 @@
 
     </div>
 </body>
-<script src="js/authorization.js"></script>
+<script type="module" src="js/authorization.js"></script>
 <script src="js/loader.js"></script>
 <script src="js/burgerNavigation.js"></script>
 <script src="https://kit.fontawesome.com/e3dce40605.js" crossorigin="anonymous"></script>

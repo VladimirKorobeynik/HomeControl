@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/owl.carousel.min.css">
     <link rel="stylesheet" href="styles/owl.theme.default.css">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/marketplace.css">
     <title>Home Control Marketplace</title>
 </head>
@@ -134,6 +135,8 @@
             </div>
         </div>
     </div>
+    <!-- contacts window -->
+    <?php include 'parts/contactWindow.php'?>
     <div class="wrapper">
 
         <?php include 'parts/marketplaceHeader.php' ?>
