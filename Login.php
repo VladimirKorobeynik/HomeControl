@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +33,7 @@
         <main>
             <div class="form_content_wrap">
                 <?php
-                if ($_COOKIE['user'] == '') :
+                if (!$_SESSION['id']):
                 ?>
                     <div class="form form_login" id="loginForm">
                         <div class="form_head">
@@ -42,7 +46,15 @@
                         </div>
                         <div class="form_content">
                             <form id="formaLog" action="web/authorization.php" method="POST">
-
+                                <?php
+                                if ($_GET["error"]):
+                                ?>
+                                <div class="error-box">
+                                    <?=$_GET["error"]?>
+                                </div>
+                                <?php
+                                endif;
+                                ?>
                                 <div class="input_block">
                                     <div class="f-group">
                                         <input id="login" type="text" placeholder="Login" name="login" />
@@ -63,7 +75,6 @@
                             </form>
                         </div>
                     </div>
-                <?php endif; ?>
                 <div class="form form_registration" id="registerForm">
                     <div class="form_head">
                         <i class="fa fa-arrow-left backToLogin" id="backToLoginForm"></i>
@@ -75,6 +86,15 @@
                         <p>Registration</p>
                     </div>
                     <div class="form_content">
+                        <?php
+                        if ($_GET["error"]):
+                        ?>
+                        <div class="error-box">
+                            <?=$_GET["error"]?>
+                        </div>
+                        <?php
+                        endif;
+                        ?>
                         <form id="formaReg" action="web/registration.php" method="POST">
                             <div class="input_block input_block_register">
                                 <div class="left_block">
@@ -130,6 +150,9 @@
                         </form>
                     </div>
                 </div>
+                <?php else:?> 
+                <a href="profile.php">Enter to profile</a>
+                <?php endif; ?>
             </div>
         </main>
 

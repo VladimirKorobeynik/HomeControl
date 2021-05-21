@@ -1,3 +1,4 @@
 <?php
-    setcookie('user', $user['name'], time() - 3600, "/");
+    session_start();
+    $_SESSION["id"] = 0;
     header('Location: ../Login.php');
