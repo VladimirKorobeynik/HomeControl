@@ -4,7 +4,9 @@
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
     $password = md5($password."ghjfdkhgj453534$#@#");
 
-    $mysql = new mysqli('localhost', 'root', '', 'HomeControl');
+    require_once "Database.php";
+
+    $mysql = Database::getConnection();
     
     $result = $mysql->query("SELECT * FROM `users` WHERE `login` = '$login' AND `password` = '$password'");
 

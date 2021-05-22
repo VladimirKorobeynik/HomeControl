@@ -10,7 +10,14 @@ class Database {
     static function sendQuery($query) {
         $connectionString = Database::getConnection();
         $result = $connectionString->query($query);
+
+        if (!$result) {
+            echo $connectionString->error;
+            exit;
+        }
+
         $connectionString->close();
+
         return $result;
     }
 }

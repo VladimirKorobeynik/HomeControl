@@ -30,12 +30,12 @@
             <a class="nav_link" href="index.php">Our company</a>
             <a class="nav_link" href="#" id="contactLink">Contacts</a>
             <?php
-            if ($_COOKIE['user'] == md5("admin"."ghjfdkhgj453534$#@#")) :
+            if ($_SESSION["is_admin"]) :
             ?>
                 <a class="nav_link admin_tool" href="admin.php"><img src="photo/adminTool.png" alt=""></a>
             <?php endif; ?>
             <?php
-            if ($_COOKIE['user'] == '') :
+            if (!$_SESSION["id"]) :
             ?>
                 <a class="nav_link" href="../Login.php">Log in</a>
             <?php else : ?>
@@ -57,7 +57,7 @@
     <div class="nav_side" id="navSide">
         <div class="nav_head">
             <?php
-            if ($_COOKIE['user'] == '') :
+            if (!$_SESSION["id"]) :
             ?>
                 <a class="nav_link" href="../Login.php">Log in</a>
             <?php else : ?>
