@@ -22,4 +22,12 @@ class Database {
 
         return $result;
     }
+
+    function sendQueryWithID($query) {
+        $connectionString = Database::getConnection();
+        $result = $connectionString->query($query);
+        $result = $connectionString->query("SELECT LAST_INSERT_ID()");
+        $connectionString->close();
+        return $result;
+    }
 }

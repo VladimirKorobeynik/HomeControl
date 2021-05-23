@@ -15,19 +15,37 @@
  * the License.
  */
 
-class Google_Service_Adsense_AdClient extends Google_Model
+class Google_Service_AdSense_AdClient extends Google_Model
 {
-  public $name;
+  public $arcOptIn;
+  public $id;
+  public $kind;
   public $productCode;
-  public $reportingDimensionId;
+  public $supportsReporting;
 
-  public function setName($name)
+  public function setArcOptIn($arcOptIn)
   {
-    $this->name = $name;
+    $this->arcOptIn = $arcOptIn;
   }
-  public function getName()
+  public function getArcOptIn()
   {
-    return $this->name;
+    return $this->arcOptIn;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
   }
   public function setProductCode($productCode)
   {
@@ -37,12 +55,12 @@ class Google_Service_Adsense_AdClient extends Google_Model
   {
     return $this->productCode;
   }
-  public function setReportingDimensionId($reportingDimensionId)
+  public function setSupportsReporting($supportsReporting)
   {
-    $this->reportingDimensionId = $reportingDimensionId;
+    $this->supportsReporting = $supportsReporting;
   }
-  public function getReportingDimensionId()
+  public function getSupportsReporting()
   {
-    return $this->reportingDimensionId;
+    return $this->supportsReporting;
   }
 }

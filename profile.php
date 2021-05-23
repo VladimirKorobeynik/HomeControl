@@ -302,7 +302,7 @@ margin-right: 5%;
                 <div class="account_content">
                     <!-- account info -->
                     <div class="account_info tabcontent" id="Account">
-                        <div class="account_head_info">
+                        <div class="account_head_info" style="position: relative;">
                             <div class="bg_file">
                                 <h3>Account information</h3>
                                 <img src="photo/fileAccountBg1.png" alt="">
@@ -456,7 +456,7 @@ margin-right: 5%;
                                 <h3>Subscription</h3>
                                 <img src="photo/fileAccountBg1.png" alt="">
                             </div>
-                            <div class="account_head_content block_theme" style="display: table; top:75px; margin-bottom: 20%;">
+                            <div class="account_head_content block_theme" style="display: table; top:75px; margin-bottom: 20%; width: 93.7%;">
                                 <div class="subscription_items">
                                   <?php
                                   $subscription_id = Database::sendQuery("SELECT * FROM `users` WHERE user_id='${_SESSION["id"]}'")->fetch_array()["subscription_id"];

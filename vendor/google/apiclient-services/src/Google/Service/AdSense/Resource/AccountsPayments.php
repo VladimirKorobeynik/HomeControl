@@ -19,25 +19,24 @@
  * The "payments" collection of methods.
  * Typical usage is:
  *  <code>
- *   $adsenseService = new Google_Service_Adsense(...);
+ *   $adsenseService = new Google_Service_AdSense(...);
  *   $payments = $adsenseService->payments;
  *  </code>
  */
-class Google_Service_Adsense_Resource_AccountsPayments extends Google_Service_Resource
+class Google_Service_AdSense_Resource_AccountsPayments extends Google_Service_Resource
 {
   /**
-   * Lists all the payments available for an account.
+   * List the payments for the specified AdSense account.
    * (payments.listAccountsPayments)
    *
-   * @param string $parent Required. The account which owns the collection of
-   * payments. Format: accounts/{account}
+   * @param string $accountId Account for which to retrieve the payments.
    * @param array $optParams Optional parameters.
-   * @return Google_Service_Adsense_ListPaymentsResponse
+   * @return Google_Service_AdSense_Payments
    */
-  public function listAccountsPayments($parent, $optParams = array())
+  public function listAccountsPayments($accountId, $optParams = array())
   {
-    $params = array('parent' => $parent);
+    $params = array('accountId' => $accountId);
     $params = array_merge($params, $optParams);
-    return $this->call('list', array($params), "Google_Service_Adsense_ListPaymentsResponse");
+    return $this->call('list', array($params), "Google_Service_AdSense_Payments");
   }
 }

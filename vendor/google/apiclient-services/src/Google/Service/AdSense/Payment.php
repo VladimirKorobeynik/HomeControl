@@ -15,41 +15,52 @@
  * the License.
  */
 
-class Google_Service_Adsense_Payment extends Google_Model
+class Google_Service_AdSense_Payment extends Google_Model
 {
-  public $amount;
-  protected $dateType = 'Google_Service_Adsense_Date';
-  protected $dateDataType = '';
-  public $name;
+  public $id;
+  public $kind;
+  public $paymentAmount;
+  public $paymentAmountCurrencyCode;
+  public $paymentDate;
 
-  public function setAmount($amount)
+  public function setId($id)
   {
-    $this->amount = $amount;
+    $this->id = $id;
   }
-  public function getAmount()
+  public function getId()
   {
-    return $this->amount;
+    return $this->id;
   }
-  /**
-   * @param Google_Service_Adsense_Date
-   */
-  public function setDate(Google_Service_Adsense_Date $date)
+  public function setKind($kind)
   {
-    $this->date = $date;
+    $this->kind = $kind;
   }
-  /**
-   * @return Google_Service_Adsense_Date
-   */
-  public function getDate()
+  public function getKind()
   {
-    return $this->date;
+    return $this->kind;
   }
-  public function setName($name)
+  public function setPaymentAmount($paymentAmount)
   {
-    $this->name = $name;
+    $this->paymentAmount = $paymentAmount;
   }
-  public function getName()
+  public function getPaymentAmount()
   {
-    return $this->name;
+    return $this->paymentAmount;
+  }
+  public function setPaymentAmountCurrencyCode($paymentAmountCurrencyCode)
+  {
+    $this->paymentAmountCurrencyCode = $paymentAmountCurrencyCode;
+  }
+  public function getPaymentAmountCurrencyCode()
+  {
+    return $this->paymentAmountCurrencyCode;
+  }
+  public function setPaymentDate($paymentDate)
+  {
+    $this->paymentDate = $paymentDate;
+  }
+  public function getPaymentDate()
+  {
+    return $this->paymentDate;
   }
 }

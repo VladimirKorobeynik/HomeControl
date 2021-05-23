@@ -28,17 +28,17 @@ session_start();
     <div class="modal_bg"></div>
     <div class="modal addModal" id="addModal">
         <div class="modal_head">
-            <h2>Добавить товар</h2>
+            <h2>Додати товар</h2>
             <span class="close_icon"><img src="photo/closeIconBlack.png" alt="X"></span>
         </div>
         <div class="modal_content">
             <form action="POST">
                 <div class="field_block">
-                    <label for="addFieldName">Название</label>
+                    <label for="addFieldName">Назва</label>
                     <input type="text" class="input_form" id="addFieldName" name="name">
                 </div>
                 <div class="field_block">
-                    <label for="addCategorie">Категория</label>
+                    <label for="addCategorie">Категорія</label>
                     <input type="select" class="input_form" id="addFieldCategorie" name="categorie">
                 </div>
                 <div class="field_block">
@@ -46,11 +46,11 @@ session_start();
                     <input type="text" class="input_form" id="addFieldType" name="type">
                 </div>
                 <div class="field_block">
-                    <label for="addFieldCount">Количество</label>
+                    <label for="addFieldCount">Кількість</label>
                     <input type="number" min="0" class="input_form" id="addFieldCount" name="count">
                 </div>
                 <div class="field_block">
-                    <label for="addFieldPrice">Цена</label>
+                    <label for="addFieldPrice">Ціна</label>
                     <input type="number" min="1" class="input_form" id="addFieldPrice" name="price">
                 </div>
                 <div class="field_block">
@@ -58,10 +58,10 @@ session_start();
                     <input type="file" id="addFieldPhoto" name="photo">
                 </div>
                 <div class="field_block">
-                    <label for="addFieldDescription">Описание</label>
+                    <label for="addFieldDescription">Опис</label>
                     <textarea type="text" id="addFieldDescription" name="description"></textarea>
                 </div>
-                <button class="standart_btn">Добавить</button>
+                <button class="standart_btn">Додати</button>
             </form>
         </div>
     </div>

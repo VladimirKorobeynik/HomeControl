@@ -1,3 +1,14 @@
+
+.more_product_block{
+    width: 100% !important;
+}
+
+.more_product_block table{
+    width: 983px !important;
+    margin:0 !important;
+    padding:0 !important;
+
+}
 main {
     min-height: 100vh;
 }

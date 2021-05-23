@@ -31,8 +31,7 @@ class Cart {
                 cartOutContainer.innerHTML += `
                 <div class="added_product_card block_theme">
                     <div class="added_card_head">
-                        <img src="photo/products/${element.device_id}.png" alt="">
-                    </div>
+                        <img src="photo/products/${element.device_id}.png" alt="" style="height: 100px;"> </div>
                     <div class="added_card_content">
                         <div class="product_info">
                             <h4 class="name_product">${element.name}</h4>

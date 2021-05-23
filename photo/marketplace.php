@@ -341,20 +341,22 @@ while ($row = $query->fetch_array()) {
                                 <?php 
                                 foreach ($products as $product):
                                 ?>
-                                <tr class="card_object block_theme" style="border: none;">
+                                <tr class="card_object block_theme">
                                     <td class="object_image">
-                                        <img src="photo/products/<?=$product["device_id"]?>.png" alt="" id="product_<?=$product["device_id"]?>" product_id="<?=$product["device_id"]?>" price="<?=$product["price"]?>" name="<?=$product["name"]?>" style="left: 0; right: 0;  height: 100px; background-color:none;">
+                                        <img src="photo/products/<?=$product["device_id"]?>.png" alt="" id="product_<?=$product["device_id"]?>" product_id="<?=$product["device_id"]?>" price="<?=$product["price"]?>" name="<?=$product["name"]?>" style="left: 0; right: 0; width: 50px; height: 50px;">
                                     </td>
                                     <td class="object_name">
                                         <p><?=$product["name"]?></p>
+                                    </td>
+                                    <td class="object_categotie">
+                                        <p><?=
+                                            Database::sendQuery("SELECT * FROM `categories` WHERE categoria_id='${product["categoria_id"]}'")->fetch_array()["name"]
+                                            ?></p>
                                     </td>
                                     <td class="object_type">
                                         <p><?=
                                             Database::sendQuery("SELECT * FROM `type` WHERE id='${product["type"]}'")->fetch_array()["name"]
                                             ?></p>
-                                    </td>
-                                    <td class="object_description" style="width:25%;">
-                                    	<p><?=$product["description"]?></p>
                                     </td>
                                     <td class="object_count">
                                         <p><?=$product["count"]?> шт.</p>
