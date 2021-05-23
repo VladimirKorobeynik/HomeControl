@@ -3,8 +3,8 @@
 require_once "web/Database.php";
 session_start(); 
 
-if ($_GET["sub"]) {
-    Database::sendQuery("UPDATE `users` SET `subscription_id`='${_GET["sub"]}' WHERE `user_id`='${_SESSION["id"]}'");
+if (array_key_exists("sub", $_GET)) {
+    Database::sendQuery("UPDATE `users` SET `subscription_id`='" . (int)$_GET["sub"] . "' WHERE `user_id`='${_SESSION["id"]}'");
 }
 
 if ($_POST) {
@@ -139,6 +139,12 @@ background-color:#505050;
 
 
     }
+
+
+    .active {
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 25px rgba(9, 196, 255, 0.25);
+    }
+
     .sub_plan:hover{
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 0px 25px rgba(9, 196, 255, 0.25);
     }
@@ -458,15 +464,12 @@ margin-right: 5%;
                                   $subscriptions = Database::sendQuery("SELECT * FROM `subscriptions`");
 
                                   while ($sub = $subscriptions->fetch_assoc()):
-                                    if ($sub["subscription_id"] == $subscription_id) continue;
 
                                     ?>                         
-                                        <button style="cursor: pointer;" onclick="window.location = '/profile.php?sub=<?=$sub["subscription_id"]?>'" class="sub_plan"><p class="fat_plan"><?=$sub["name"]?></p><br>$<?=$sub["price"]?>/month after offer period</button>
+                                        <button style="cursor: pointer;" onclick="window.location = '/profile.php?sub=<?=$sub["subscription_id"]?>'" class="sub_plan <?=($sub["subscription_id"] == $subscription_id ? "active" : "")?>"><p class="fat_plan"><?=$sub["name"]?></p><br>$<?=$sub["price"]?>/month after offer period</button>
                                     <? endwhile; ?>         
 
-                                    <? if ($subscription_id != 0): ?>
-                                        <button style="cursor: pointer;" onclick="window.location = '/profile.php?sub=0'" href="/?subscription=0" class="сancel_sub">Отменить подписку</button>
-                                    <? endif; ?>
+                                    <button style="cursor: pointer;" onclick="window.location = '/profile.php?sub=0'" href="/?subscription=0" class="сancel_sub <?=($sub["subscription_id"] == 0 ? "active" : "")?>">Отменить подписку</button>
                                 </div>
 
                             </div>

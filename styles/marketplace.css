@@ -770,7 +770,11 @@ html::-webkit-scrollbar {
 }
 
 .checkInput {
-    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+    width: 120%;
+    cursor: pointer;
 }
 
 .checkInput:checked~.check_wrap {

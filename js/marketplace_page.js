@@ -6,32 +6,8 @@ import Order from './mainClass/Order.js';
 //Functions
 import { sidebarBlockShow, selectOption, setRightValue, setLeftValue, setEventContacts } from './marketplaceEventHandler.js';
 
-///////// TEST 
-
-async function getProductData() {
-    let response = await fetch('http://localhost/web/product.php');
-
-    if (response.ok) { // если HTTP-статус в диапазоне 200-299
-        // получаем тело ответа (см. про этот метод ниже)
-        let data = await response.json();
-        sessionStorage.setItem('productData', JSON.stringify(data));
-    } else {
-        alert("Ошибка HTTP: " + response.status);
-    }
-}
-getProductData();
-
-let responseData = JSON.parse(sessionStorage.getItem('productData'));
-
-// console.log(responseData);
-
-let products = new Products(responseData);
 let cart = new Cart();
 cart.loadCurrentProduct();
-
-products.outProduct();
-
-/////////////
 
 //Categories select 
 let categories = document.getElementById('categBlock');
@@ -254,50 +230,60 @@ coverBlockFilter.onclick = function() {
     bodyMarketplace.style.overflow = "visible";
 }
 
+
+const addToCart = (img) => {
+    let id = $(img).attr("product_id");
+    let price = $(img).attr("price");
+    let name = $(img).attr("name");
+
+    let cartElement = (window.innerWidth < 1080) ? '.burger_menu' : '.cart_block';
+
+    $(img).clone().css({
+        'position': 'absolute',
+        'z-index': 1000,
+        'width': '20%',
+        'left': $(img).offset()['left'],
+        'top': $(img).offset()['top'],
+        'border-radius': '20px',
+
+    }).appendTo('.fly_product').animate({
+        top: $(cartElement).offset()['top'],
+        left: $(cartElement).offset()['left'],
+        opacity: 0,
+        width: 40
+    }, 1000, function() {
+        $(this).remove();
+        $('.added_product_messagebox').show().animate({
+            top: 100,
+            opacity: 1
+        });
+    });
+    setTimeout(function() {
+        $('.added_product_messagebox').fadeOut(500).animate({
+            top: 0,
+            opacity: 0
+        })
+    }, 2000);
+    setTimeout(function() {
+        document.getElementById('cartCounter').innerHTML = +document.getElementById('cartCounter').innerHTML + 1;
+    }, 1000);
+
+    cart.addProduct({
+        device_id: id,
+        countBuy: 0,
+        price: price,
+        name: name
+    });
+    localStorage.setItem('basketArray', JSON.stringify(cart.cartContainer));
+};
+
 //Open cart
 arrCardProduct.map((elem, index) => elem
     .childNodes[1]
     .childNodes[7]
     .childNodes[3]
     .addEventListener('click', function() {
-        //Cart fly adding animation 
-        let img = elem.childNodes[1].childNodes[1].childNodes[1];
-
-        let cartElement = (window.innerWidth < 1080) ? '.burger_menu' : '.cart_block';
-
-        $(img).clone().css({
-            'position': 'absolute',
-            'z-index': 1000,
-            'width': '20%',
-            'left': $(img).offset()['left'],
-            'top': $(img).offset()['top'],
-            'border-radius': '20px',
-
-        }).appendTo('.fly_product').animate({
-            top: $(cartElement).offset()['top'],
-            left: $(cartElement).offset()['left'],
-            opacity: 0,
-            width: 40
-        }, 1000, function() {
-            $(this).remove();
-            $('.added_product_messagebox').show().animate({
-                top: 100,
-                opacity: 1
-            });
-        });
-        setTimeout(function() {
-            $('.added_product_messagebox').fadeOut(500).animate({
-                top: 0,
-                opacity: 0
-            })
-        }, 2000);
-        setTimeout(function() {
-            document.getElementById('cartCounter').innerHTML = +document.getElementById('cartCounter').innerHTML + 1;
-        }, 1000);
-
-        //Adding to cart
-        cart.addProduct(products.getProduct(index));
-        localStorage.setItem('basketArray', JSON.stringify(cart.cartContainer));
+        addToCart(elem.childNodes[1].childNodes[1].childNodes[1]);
     })
 );
 
@@ -310,9 +296,19 @@ document.getElementById('cartLinkSide').onclick = function() {
     modalControl(document.getElementById('cart'), 'cart');
 }
 
+$(".add_to_cart").click(event => {
+    addToCart(document.getElementById($(event.target).attr("product_id")));
+});
+
+async function checkout() {
+    let json = localStorage.getItem('basketArray');
+    await fetch('https://test.sandstone.kh.ua/parts/checkout.php?products=' + encodeURI(json));
+}
+
 //Order open event
 document.getElementById('checkout').onclick = function() {
     if (cart.getCountAddedProduct() > 0 && document.cookie != '') {
+        checkout();
         hideModal(document.getElementById('cart'));
         modalControl(document.getElementById('order'), 'order');
 
@@ -330,7 +326,10 @@ function modalControl(modal, modalName) {
         cart.outProductInCart();
     }
     if (modalName == 'order') {
-
+        if (id == 0) {
+            alert("Ошибка! Вы должны быть зарегистрированы!");
+            return;
+        }
     }
 
     let overlay = document.querySelector('.modal_bg');
@@ -364,22 +363,7 @@ function hideModal(modal) {
 let searchField = document.getElementById('searchField');
 
 searchField.addEventListener('keyup', function(e) {
-    if (e.keyCode == 13) {
-        let data = {
-            "searchValue": searchField.value,
-        };
-        fetch('http://localhost/web/product.php', {
-                method: 'post',
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(response => {
-                console.log(response);
-                // products.updateData(response);
-                // products.outProduct();
-            });
-    }
-})
+    if (e.code != "Enter") return;
+
+    toParameter("search", e.target.value);
+});

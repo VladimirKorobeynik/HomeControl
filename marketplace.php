@@ -1,5 +1,42 @@
 <?php
 session_start();
+require_once "web/Database.php";
+
+$typesArray = [];
+$typesArray2 = [];
+if ($_GET["types"]) {
+    $typesArray = $_GET["types"];
+    $typesArray2 = [];
+
+    for ($i=0; $i < count($typesArray); $i++) { 
+        $typesArray2[$i] = "type = '${typesArray[$i]}'";
+    }
+
+    $types = implode(" || ", $typesArray2);
+}
+
+if ($_GET["categoria"]) {
+    if ($types) $types = "(" . $types;
+    $categoria = ($types ? ") AND " : "") . "categoria_id = '${_GET["categoria"]}'";
+}
+
+$maxPriceInDb = Database::sendQuery("SELECT * FROM `devices` ORDER BY price DESC")->fetch_array()["price"];
+
+$minPrice = $_GET["min_price"] ?? 0; 
+$maxPrice = $_GET["max_price"] ?? $maxPriceInDb;
+
+$order = $_GET["order"] ?? "price";
+$orderType = $_GET["order_type"] ?? "DESC";
+$searchString = "AND name LIKE '%${_GET["search"]}%'";
+
+$products = [];
+
+$query = Database::sendQuery("SELECT * FROM `devices` WHERE $types $categoria " . ($types || $categoria ? " AND " : "") . " price >= $minPrice AND price <= $maxPrice $searchString ORDER BY $order $orderType");
+
+while ($row = $query->fetch_array()) {
+    $products[] = $row;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +53,30 @@ session_start();
 </head>
 
 <body id="bodyMarketplace">
+    <script type="text/javascript">
+        const id = <?=$_SESSION["id"] ? $_SESSION["id"] : "0"?>;
+        const replaceParameter = (url, parameter, value) => {
+            url = url.replace(new RegExp("&?" + parameter + "=([a-zA-Z0-9а-яёА-ЯЁ_]*)"), "");
+
+            if (url.includes("?")) {
+                return url + "&" + parameter + "=" + value;
+            } else {
+                return url + "?" + parameter + "=" + value;
+            }
+        };
+
+        const toParameter = (parameter, value) => {
+            window.location = replaceParameter(window.location.href, parameter, value);
+        }
+
+        const order = (row, type) => {
+            window.location = replaceParameter(replaceParameter(window.location.href, "order", row), "order_type", type);
+        };
+
+        const categoria = id => {
+            toParameter("categoria", id);
+        };
+    </script>
     <!-- preloader -->
     <div class="preloader" id="preloader">
         <div class="loader">
@@ -84,59 +145,54 @@ session_start();
             <h3>Filter</h3>
         </div>
         <div class="more_filter">
-            <div class="setting_filter">
-                <div class="input_block">
-                    <div class="from_price">
-                        <p>From</p>
-                        <input type="number" value="0" id="minPriceMob" min="0" max="100">
-                    </div>
-                    <div class="divider"></div>
-                    <div class="to_price">
-                        <input type="number" value="100" id="maxPriceMob" min="0" max="100">
-                        <p>To</p>
-                    </div>
-                </div>
-                <div class="wrap_slider">
-                    <div class="slider_price_block">
-                        <input type="range" min="0" max="100" value="25" id="inputLeftMob">
-                        <input type="range" min="0" max="100" value="75" id="inputRightMob">
-                        <div class="slider">
-                            <div class="track"></div>
-                            <div class="range" id="rangeMob"></div>
-                            <div class="tumbler tumbler_left" id="leftTumbMob"></div>
-                            <div class="tumbler tumbler_right" id="rightTumbMob"></div>
+            <form>
+                <div class="setting_filter">
+                    <div class="input_block">
+                        <div class="from_price">
+                            <p>From</p>
+                            <input type="number" value="0" id="minPriceMob" min="0" max="<?=$maxPriceInDb?>">
+                        </div>
+                        <div class="divider"></div>
+                        <div class="to_price">
+                            <input type="number" value="<?=$maxPriceInDb?>" id="maxPriceMob" min="0" max="<?=$maxPriceInDb?>">
+                            <p>To</p>
                         </div>
                     </div>
-                </div>
-                <div class="type_device">
-                    <h4>Type device</h4>
-                    <div class="checkbox_container">
-                        <div class="checkbox_box">
-                            <input type="checkbox" id="checkboxMob1" class="checkInput">
-                            <label for="checkboxMob1" class="check_wrap"></label>
-                            <p>Type 1</p>
-                        </div>
-                        <div class="checkbox_box">
-                            <input type="checkbox" id="checkboxMob2" class="checkInput">
-                            <label for="checkboxMob2" class="check_wrap"></label>
-                            <p>Type 2</p>
-                        </div>
-                        <div class="checkbox_box">
-                            <input type="checkbox" id="checkboxMob3" class="checkInput">
-                            <label for="checkboxMob3" class="check_wrap"></label>
-                            <p>Type 3</p>
-                        </div>
-                        <div class="checkbox_box">
-                            <input type="checkbox" id="checkboxMob4" class="checkInput">
-                            <label for="checkboxMob4" class="check_wrap"></label>
-                            <p>Type 4</p>
+                    <div class="wrap_slider">
+                        <div class="slider_price_block">
+                            <input type="range" min="0" max="<?=$maxPriceInDb?>" value="<?=$minPrice?>" id="inputLeftMob" name="min_price">
+                            <input type="range" min="0" max="<?=$maxPriceInDb?>" value="<?=$maxPrice?>" id="inputRightMob" name="max_price">
+                            <div class="slider">
+                                <div class="track"></div>
+                                <div class="range" id="rangeMob"></div>
+                                <div class="tumbler tumbler_left" id="leftTumbMob"></div>
+                                <div class="tumbler tumbler_right" id="rightTumbMob"></div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="type_device">
+                        <h4>Type device</h4>
+                        <div class="checkbox_container">
+                            <?php
+                            $query = Database::sendQuery("SELECT * FROM type");
+                            while ($type = $query->fetch_array()) {
+                            ?>
+                            <div class="checkbox_box">
+                                <input type="checkbox" id="checkBoxMob<?=$type["id"]?>" name="types[]" value="<?=$type["id"]?>" class="checkInput" <?=(in_array($type["id"], $typesArray) ? "checked" : "")?>>
+                                <label for="checkBoxMob<?=$type["id"]?>" class="check_wrap"></label>
+                                <p><?=$type["type"]?></p>
+                            </div>
+                            <?
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <div class="block_filter_btn">
+                        <button class="btn_apply" id="btnApplyMob">Apply</button>
+                    </div>
                 </div>
-                <div class="block_filter_btn">
-                    <button class="btn_apply" id="btnApplyMob">Apply</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <!-- contacts window -->
@@ -155,15 +211,13 @@ session_start();
                                 <span id="arrowCateg"><img src="photo/arrowList.png" alt=""></span>
                             </div>
                             <div class="more_categories" id="categMore">
-                                <div class="option_categories">
-                                    <p>Устройства</p>
-                                </div>
-                                <div class="option_categories">
-                                    <p>Датчики</p>
-                                </div>
-                                <div class="option_categories">
-                                    <p>Наборы</p>
-                                </div>
+                                <?
+                                $query = Database::sendQuery("SELECT * FROM `categories`");
+                                while ($categoria = $query->fetch_array()):?>
+                                    <div categoria_id="<?=$categoria["categoria_id"]?>" class="option_categories <?=($categoria["categoria_id"] == $_GET["categoria"] ? "selected_categ_option" : "")?>">
+                                        <p><?=$categoria["name"]?></p>
+                                    </div>
+                                <?endwhile;?>
                             </div>
                         </div>
                         <div class="filter_block block_theme">
@@ -173,57 +227,51 @@ session_start();
                             </div>
                             <div class="more_filter" id="moreFilter">
                                 <div class="setting_filter">
-                                    <div class="input_block">
+                                    <form method="GET">
+                                        <div class="input_block">
                                         <div class="from_price">
                                             <p>From</p>
-                                            <input type="number" value="0" id="minPrice" min="0" max="100">
+                                            <input type="number" value="0" id="minPrice" min="0" max="<?=$maxPriceInDb?>">
                                         </div>
                                         <div class="divider"></div>
                                         <div class="to_price">
-                                            <input type="number" value="100" id="maxPrice" min="0" max="100">
+                                            <input type="number" value="<?=$maxPriceInDb?>" id="maxPrice" min="0" max="<?=$maxPriceInDb?>">
                                             <p>To</p>
                                         </div>
-                                    </div>
-                                    <div class="wrap_slider">
-                                        <div class="slider_price_block">
-                                            <input type="range" min="0" max="100" value="25" id="inputLeft">
-                                            <input type="range" min="0" max="100" value="75" id="inputRight">
-                                            <div class="slider">
-                                                <div class="track"></div>
-                                                <div class="range" id="range"></div>
-                                                <div class="tumbler tumbler_left" id="leftTumb"></div>
-                                                <div class="tumbler tumbler_right" id="rightTumb"></div>
+                                        </div>
+                                        <div class="wrap_slider">
+                                            <div class="slider_price_block">
+                                                <input type="range" min="0" max="<?=$maxPriceInDb?>" value="<?=$minPrice?>" id="inputLeft" name="min_price">
+                                                <input type="range" min="0" max="<?=$maxPriceInDb?>" value="<?=$maxPrice?>" id="inputRight" name="max_price">
+                                                <div class="slider">
+                                                    <div class="track"></div>
+                                                    <div class="range" id="range"></div>
+                                                    <div class="tumbler tumbler_left" id="leftTumb"></div>
+                                                    <div class="tumbler tumbler_right" id="rightTumb"></div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="type_device">
-                                        <h4>Type device</h4>
-                                        <div class="checkbox_container">
-                                            <div class="checkbox_box">
-                                                <input type="checkbox" id="checkbox1" class="checkInput">
-                                                <label for="checkbox1" class="check_wrap"></label>
-                                                <p>Type 1</p>
-                                            </div>
-                                            <div class="checkbox_box">
-                                                <input type="checkbox" id="checkbox2" class="checkInput">
-                                                <label for="checkbox2" class="check_wrap"></label>
-                                                <p>Type 2</p>
-                                            </div>
-                                            <div class="checkbox_box">
-                                                <input type="checkbox" id="checkbox3" class="checkInput">
-                                                <label for="checkbox3" class="check_wrap"></label>
-                                                <p>Type 3</p>
-                                            </div>
-                                            <div class="checkbox_box">
-                                                <input type="checkbox" id="checkbox4" class="checkInput">
-                                                <label for="checkbox4" class="check_wrap"></label>
-                                                <p>Type 4</p>
+                                        <div class="type_device">
+                                            <h4>Type device</h4>
+                                            <div class="checkbox_container">
+                                                <?php
+                                                $query = Database::sendQuery("SELECT * FROM type");
+                                                while ($type = $query->fetch_array()) {
+                                                ?>
+                                                <div class="checkbox_box">
+                                                    <input type="checkbox" id="checkBox<?=$type["id"]?>" name="types[]" value="<?=$type["id"]?>" class="checkInput" <?=(in_array($type["id"], $typesArray) ? "checked" : "")?>>
+                                                    <label for="checkBox<?=$type["id"]?>" class="check_wrap"></label>
+                                                    <p><?=$type["type"]?></p>
+                                                </div>
+                                                <?
+                                                }
+                                                ?>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="block_filter_btn">
-                                        <button class="btn_apply" id="btnApply">Apply</button>
-                                    </div>
+                                        <div class="block_filter_btn">
+                                            <button class="btn_apply" id="btnApply">Apply</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -234,15 +282,24 @@ session_start();
                                 <div class="select_container">
                                     <div class="select">
                                         <div class="select_header">
-                                            <span class="selected_option">По возростанию цены</span>
+                                            <span class="selected_option"><?
+
+                                            if ($_GET["order"] == "price") {
+                                                if ($_GET["order_type"] == "DESC") echo "По убыванию цены";
+                                                else echo "По возростанию цены";
+                                            } else {
+                                                echo "По количеству";
+                                            }
+
+                                            ?></span>
                                             <div class="select_img">
                                                 <img src="photo/selectArrow.png" alt="">
                                             </div>
                                         </div>
                                         <div class="select_body">
-                                            <div class="select_option selected_option_body">По возростанию цены</div>
-                                            <div class="select_option">По убыванию цены</div>
-                                            <div class="select_option">По количеству</div>
+                                            <div class="select_option" onclick="order('price', 'ASC')">По возростанию цены</div>
+                                            <div class="select_option" onclick="order('price', 'DESC')">По убыванию цены</div>
+                                            <div class="select_option" onclick="order('count', 'DESC')">По количеству</div>
                                         </div>
                                     </div>
                                 </div>
@@ -258,27 +315,61 @@ session_start();
                                 <div class="select_container">
                                     <div class="select">
                                         <div class="select_header">
-                                            <span class="selected_option">Устройства</span>
+                                            <span class="selected_option"><?=Database::sendQuery("SELECT * FROM `categories` WHERE categoria_id=" . ($_GET["categoria"] ? $_GET["categoria"] : 1))->fetch_array()["name"]?></span>
                                             <div class="select_img">
                                                 <img src="photo/selectArrow.png" alt="">
                                             </div>
                                         </div>
                                         <div class="select_body">
-                                            <div class="select_option selected_option_body">Устройства</div>
-                                            <div class="select_option">Датчики</div>
-                                            <div class="select_option">Наборы</div>
+                                            <?
+                                            $query = Database::sendQuery("SELECT * FROM `categories`");
+                                            while ($categoria = $query->fetch_array()):?>
+                                                <div categoria_id="<?=$categoria["categoria_id"]?>" onclick="categoria(<?=$categoria['categoria_id']?>)" class="select_option"><?=$categoria["name"]?></div>
+                                            <?endwhile;?>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="filter_activate_btn_block">
-                                    <button class="standart_btn filter_activate_btn" id="filterActiveBtn">Filter<span class="selected_parameters">3</span></button>
+                                    <button class="standart_btn filter_activate_btn" id="filterActiveBtn">Filter</button>
                                 </div>
                             </div>
                         </div>
                         <div class="card_grid" id="mainCardGrid">
                         </div>
                         <div class="more_product_block">
-                            <button class="standart_btn more_product_btn">More</button>
+                            <table>
+                                <?php 
+                                foreach ($products as $product):
+                                ?>
+                                <tr class="card_object block_theme">
+                                    <td class="object_image">
+                                        <img src="photo/products/<?=$product["device_id"]?>.png" alt="" id="product_<?=$product["device_id"]?>" product_id="<?=$product["device_id"]?>" price="<?=$product["price"]?>" name="<?=$product["name"]?>" style="left: 0; right: 0;">
+                                    </td>
+                                    <td class="object_name">
+                                        <p><?=$product["name"]?></p>
+                                    </td>
+                                    <td class="object_categotie">
+                                        <p><?=
+                                            Database::sendQuery("SELECT * FROM `categories` WHERE categoria_id='${product["categoria_id"]}'")->fetch_array()["name"]
+                                            ?></p>
+                                    </td>
+                                    <td class="object_type">
+                                        <p><?=
+                                            Database::sendQuery("SELECT * FROM `type` WHERE id='${product["type"]}'")->fetch_array()["name"]
+                                            ?></p>
+                                    </td>
+                                    <td class="object_count">
+                                        <p><?=$product["count"]?> шт.</p>
+                                    </td>
+                                    <td class="object_price">
+                                        <p><?=$product["price"]?> грн</p>
+                                    </td>
+                                    <td>
+                                        <button class="standart_btn buy_btn add_to_cart" product_id="product_<?=$product["device_id"]?>">Buy</button>
+                                    </td>
+                                </tr>
+                                <?php endforeach;?>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -292,119 +383,7 @@ session_start();
                                 <div class="card_wrapper card_mode_tile card_viewed">
                                     <div class="card">
                                         <div class="product_image">
-                                            <img src="photo/testProduct.png" alt="">
-                                        </div>
-                                        <div class="min_describe">
-                                            <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                            <div class="in_stock_block">
-                                                <span class="in_stock">
-                                                    <img src="photo/checkmark.png" alt="">
-                                                </span>
-                                                <p>in stock</p>
-                                            </div>
-                                        </div>
-                                        <div class="more_describe">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                                quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                                Repellendus officiis quae quisquam blanditiis provident modi,
-                                                itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                        </div>
-                                        <div class="buy_block">
-                                            <span class="price">1000grn</span>
-                                            <button class="standart_btn buy_btn">Buy</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="card_wrapper card_mode_tile card_viewed">
-                                    <div class="card">
-                                        <div class="product_image">
-                                            <img src="photo/testProduct.png" alt="">
-                                        </div>
-                                        <div class="min_describe">
-                                            <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                            <div class="in_stock_block">
-                                                <span class="in_stock">
-                                                    <img src="photo/checkmark.png" alt="">
-                                                </span>
-                                                <p>in stock</p>
-                                            </div>
-                                        </div>
-                                        <div class="more_describe">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                                quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                                Repellendus officiis quae quisquam blanditiis provident modi,
-                                                itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                        </div>
-                                        <div class="buy_block">
-                                            <span class="price">1000grn</span>
-                                            <button class="standart_btn buy_btn">Buy</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="card_wrapper card_mode_tile card_viewed">
-                                    <div class="card">
-                                        <div class="product_image">
-                                            <img src="photo/testProduct.png" alt="">
-                                        </div>
-                                        <div class="min_describe">
-                                            <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                            <div class="in_stock_block">
-                                                <span class="in_stock">
-                                                    <img src="photo/checkmark.png" alt="">
-                                                </span>
-                                                <p>in stock</p>
-                                            </div>
-                                        </div>
-                                        <div class="more_describe">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                                quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                                Repellendus officiis quae quisquam blanditiis provident modi,
-                                                itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                        </div>
-                                        <div class="buy_block">
-                                            <span class="price">1000grn</span>
-                                            <button class="standart_btn buy_btn">Buy</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="card_wrapper card_mode_tile card_viewed">
-                                    <div class="card">
-                                        <div class="product_image">
-                                            <img src="photo/testProduct.png" alt="">
-                                        </div>
-                                        <div class="min_describe">
-                                            <h4 class="name_product">Smart lightbulb Xiaomi</h4>
-                                            <div class="in_stock_block">
-                                                <span class="in_stock">
-                                                    <img src="photo/checkmark.png" alt="">
-                                                </span>
-                                                <p>in stock</p>
-                                            </div>
-                                        </div>
-                                        <div class="more_describe">
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere,
-                                                quibusdam harum! Veritatis dolore officiis sapiente numquam!
-                                                Repellendus officiis quae quisquam blanditiis provident modi,
-                                                itaque facere, voluptas, aspernatur quidem veniam dolorem!</p>
-                                        </div>
-                                        <div class="buy_block">
-                                            <span class="price">1000grn</span>
-                                            <button class="standart_btn buy_btn">Buy</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="card_wrapper card_mode_tile card_viewed">
-                                    <div class="card">
-                                        <div class="product_image">
-                                            <img src="photo/testProduct.png" alt="">
+                                            <img src="photo/testProduct.png" alt="" product_id="1" price="1000" name="Smart lightbulb Xiaomi">
                                         </div>
                                         <div class="min_describe">
                                             <h4 class="name_product">Smart lightbulb Xiaomi</h4>

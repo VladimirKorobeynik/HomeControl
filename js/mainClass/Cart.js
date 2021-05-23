@@ -17,49 +17,6 @@ class Cart {
         }
     }
 
-    //Loading of the added products from the localStorage
-    loadCurrentProduct() {
-        let basketData = JSON.parse(localStorage.getItem('basketArray'));
-        if (basketData != null) {
-            this.cartContainer = basketData;
-            this.updateCartCounter(this.getCountAddedProduct(), true);
-        }
-    }
-
-    //Create order
-    createOrder() {
-
-    }
-
-    //Removing a product from cart
-    deleteProduct(index) {
-        let newCartContainer = [];
-        this.cartContainer.map((elem, indexElem) => {
-            if (indexElem != index) {
-                newCartContainer.push(elem);
-            } else {
-                this.updateCartCounter(elem.countBuy, false);
-            }
-        });
-        this.cartContainer = newCartContainer;
-        localStorage.setItem('basketArray', JSON.stringify(this.cartContainer));
-    }
-
-    //Get count products in cart
-    getCountAddedProduct() {
-        return this.cartContainer.length;
-    }
-
-    //Calculate cart total cost 
-    calculateTotalCost() {
-        let totalCost = 0;
-        if (this.cartContainer.length > 0)
-            this.cartContainer.map(elem => {
-                totalCost += elem.price * elem.countBuy;
-            });
-        return totalCost;
-    }
-
     //Out product in cart
     outProductInCart() {
         let cartOutContainer = document.getElementById('addedCardGrid');
@@ -74,7 +31,7 @@ class Cart {
                 cartOutContainer.innerHTML += `
                 <div class="added_product_card block_theme">
                     <div class="added_card_head">
-                        <img src="${element.image}" alt="">
+                        <img src="photo/products/${element.device_id}.png" alt="">
                     </div>
                     <div class="added_card_content">
                         <div class="product_info">
@@ -150,6 +107,49 @@ class Cart {
             cartOutContainer.innerHTML = '<p class="text_empty_cart">Ваша корзина пуста</p>';
             totalCostContainer.innerHTML = 0 + 'грн';
         }
+    }
+
+    //Loading of the added products from the localStorage
+    loadCurrentProduct() {
+        let basketData = JSON.parse(localStorage.getItem('basketArray'));
+        if (basketData != null) {
+            this.cartContainer = basketData;
+            this.updateCartCounter(this.getCountAddedProduct(), true);
+        }
+    }
+
+    //Create order
+    createOrder() {
+
+    }
+
+    //Removing a product from cart
+    deleteProduct(index) {
+        let newCartContainer = [];
+        this.cartContainer.map((elem, indexElem) => {
+            if (indexElem != index) {
+                newCartContainer.push(elem);
+            } else {
+                this.updateCartCounter(elem.countBuy, false);
+            }
+        });
+        this.cartContainer = newCartContainer;
+        localStorage.setItem('basketArray', JSON.stringify(this.cartContainer));
+    }
+
+    //Get count products in cart
+    getCountAddedProduct() {
+        return this.cartContainer.length;
+    }
+
+    //Calculate cart total cost 
+    calculateTotalCost() {
+        let totalCost = 0;
+        if (this.cartContainer.length > 0)
+            this.cartContainer.map(elem => {
+                totalCost += elem.price * elem.countBuy;
+            });
+        return totalCost;
     }
 
     //Update cart counter

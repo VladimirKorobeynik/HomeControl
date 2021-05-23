@@ -15,22 +15,9 @@ function sidebarBlockShow(mainBlock, moreBlock, arrow) {
 
 //Select option
 function selectOption(arrOption) {
-    let oldSelected;
     for (let i = 0; i < arrOption.length; i++) {
         arrOption[i].addEventListener('click', function() {
-            let selectedElem = i;
-            let countSelectedElem = document.getElementsByClassName('selected_categ_option');
-
-            if (countSelectedElem.length == 0) {
-                arrOption[selectedElem].classList.add('selected_categ_option');
-                oldSelected = selectedElem;
-            } else if (selectedElem == oldSelected) {
-                arrOption[oldSelected].classList.remove('selected_categ_option');
-            } else {
-                arrOption[oldSelected].classList.remove('selected_categ_option');
-                arrOption[selectedElem].classList.add('selected_categ_option');
-                oldSelected = selectedElem;
-            }
+            toParameter("categoria",  $(arrOption[i]).attr("categoria_id"));
         });
     }
 }

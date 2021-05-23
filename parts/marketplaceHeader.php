@@ -22,8 +22,7 @@
                         <input type="text" id="searchField" name="searchField" placeholder="Search ...">
                         <button class="standart_btn"><img src="photo/searchIcon.png" alt=""></button>
                     </form> -->
-            <input type="text" id="searchField" name="searchField" placeholder="Search ...">
-            <img src="photo/searchIcon.png" alt="">
+            <input type="text" id="searchField" name="search" placeholder="Search ..." value="<?=$_GET["search"]?>">
         </div>
         <nav class="nav">
             <a class="nav_link" href="marketplace.php">Home</a>
